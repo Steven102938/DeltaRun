@@ -35,17 +35,26 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         static var locValueThree = CLLocationCoordinate2D()
         static var locValueToSave = CLLocationCoordinate2D()
         static var randomRotate: Double = Double(arc4random_uniform(90))
-
+        static var routeDistance: Double?
+        static var CalculateRouteDistance:Double = mainInstance.GlobalDistanceToRun!
+        static var selectedRoute: Dictionary<NSObject, AnyObject>!
         
     }
     
+    @IBAction func Segue(sender: AnyObject) {
+        mainInstance.directionLocOne = loc.locValue
+        mainInstance.directionLocTwo = loc.locValueOne
+        mainInstance.directionLocThree = loc.locValueTwo
+        mainInstance.directionLocFour = loc.locValueThree
+        mainInstance.routeInfo = loc.selectedRoute
+    }
    
     @IBAction func regnerateRoute(sender: AnyObject) -> Void {
-        loc.randomRotate = loc.randomRotate + Double(arc4random_uniform(90))
-        self.locationManager.stopUpdatingLocation()
+        loc.randomRotate = Double(arc4random_uniform(360))
+        loc.selectedRoute = nil
         self.locationManager.startUpdatingLocation()
+        mapOverView.clear()
         
-        getDirections(nil, travelMode: nil)
     }
     
     
@@ -56,7 +65,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     var startLatitude: Double? = nil
     
     let baseURLDirections = "https://maps.googleapis.com/maps/api/directions/json?"
-    var selectedRoute: Dictionary<NSObject, AnyObject>!
+    
     var overviewPolyline: Dictionary<NSObject, AnyObject>!
     var totalDistanceInMeters: UInt = 0
     var totalDistance: String!
@@ -74,15 +83,16 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     var destinationOne:MKMapItem = MKMapItem()
     var SaveRoute: RouteDatabase?
     
-    var CalculateRouteDistance = mainInstance.GlobalDistanceToRun
+    
     var RouteDistanceCoordinateDividedBy4 = ( mainInstance.GlobalDistanceToRun! / 276)
     
   
     func getDirections(waypoints: Array<String>!, travelMode: AnyObject!){
-        
+                var maxLoop = 0
                 var directionsURLString = baseURLDirections + "origin=" + "(\(loc.locValue.latitude), \(loc.locValue.longitude))" + "&destination=" + "(\(loc.locValue.latitude), \(loc.locValue.longitude))" + "&waypoints=" + "(\(loc.locValueOne.latitude), \(loc.locValueOne.longitude))" + "|" + "(\(loc.locValueTwo.latitude), \(loc.locValueTwo.longitude))" + "|" + "(\(loc.locValueThree.latitude), \(loc.locValueThree.longitude))" + "&mode=walking" + "&avoid=highways" + "?avoid=ferries"
         
                 println("\(directionsURLString)")
+        println("\(loc.randomRotate)")
                 directionsURLString = directionsURLString.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
                 
                 let directionsURL = NSURL(string: directionsURLString)
@@ -101,13 +111,13 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
                         
                     }
                     else {
-//
-                            self.selectedRoute = (dictionary["routes"] as! Array<Dictionary<NSObject, AnyObject>>)[0]
+
+                            loc.selectedRoute = (dictionary["routes"] as! Array<Dictionary<NSObject, AnyObject>>)[0]
                         
                         
-                            self.overviewPolyline = self.selectedRoute["overview_polyline"] as! Dictionary<NSObject, AnyObject>
+                            self.overviewPolyline = loc.selectedRoute["overview_polyline"] as! Dictionary<NSObject, AnyObject>
                             
-                            let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
+                            let legs = loc.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
                             
                             let startLocationDictionary = legs[0]["start_location"] as! Dictionary<NSObject, AnyObject>
                             self.originCoordinate = loc.locValue
@@ -122,8 +132,22 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
                             self.configureMapAndMarkersForRoute()
                             self.drawRoute()
                             self.displayRouteInfo()
-                            
+                        println(loc.selectedRoute)
+                  
+                      
                         
+                        if loc.routeDistance! * 0.621371 >= loc.CalculateRouteDistance + loc.CalculateRouteDistance/2 || loc.routeDistance <= loc.CalculateRouteDistance - loc.CalculateRouteDistance/2 {
+                            
+                            loc.randomRotate = Double(arc4random_uniform(90))
+                            loc.selectedRoute = nil
+                            self.locationManager.startUpdatingLocation()
+                            self.mapOverView.clear()
+                            maxLoop++
+                            if maxLoop >= 20 {
+                                println("error")
+                                
+                            }
+                        }
                        
                     }
                 })
@@ -171,7 +195,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
    
     func calculateTotalDistanceAndDuration() {
-        let legs = self.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
+        let legs = loc.selectedRoute["legs"] as! Array<Dictionary<NSObject, AnyObject>>
         
         totalDistanceInMeters = 0
         totalDurationInSeconds = 0
@@ -182,8 +206,8 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
         
         
-        let distanceInKilometers: Double = Double(totalDistanceInMeters / 1000)
-        totalDistance = "Total Distance: \(distanceInKilometers) Km"
+        loc.routeDistance = Double(totalDistanceInMeters / 1000)
+        totalDistance = "Total Distance: \(loc.routeDistance) Km"
         
         
         let mins = totalDurationInSeconds / 60
@@ -214,17 +238,18 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!){
        
-        var degreeToRotate: Double = 0
+        var degreeToRotate: Double = loc.randomRotate
+        //check 79 82 31
         let randomDegreeToRotate:Double = degreeToRotate * (M_PI/180)
         
         if degreeToRotate <= 90 {
             
-        var degreeminus90 = Double(90 - degreeToRotate)
-        var sinOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (sin(degreeminus90)))
-        var cosOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (cos(degreeminus90)))
+        var degreeminus90 = (Double(90 - degreeToRotate)) * (M_PI/180)
+        var sinOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (sin(randomDegreeToRotate)))
+        var cosOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (cos(randomDegreeToRotate)))
         
-        var sinOfDistanceOne =  (RouteDistanceCoordinateDividedBy4 * (sin(randomDegreeToRotate)))
-        var cosOfDistanceOne = (RouteDistanceCoordinateDividedBy4 * (cos(randomDegreeToRotate)))
+        var sinOfDistanceOne =  (RouteDistanceCoordinateDividedBy4 * (sin(degreeminus90)))
+        var cosOfDistanceOne = (RouteDistanceCoordinateDividedBy4 * (cos(degreeminus90)))
         println("\(sinOfDistanceOne)" + "\(cosOfDistanceOne)")
         
         
@@ -237,28 +262,28 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         loc.locValueOne = CLLocationCoordinate2DMake(((loc.locValue.latitude) +  sinOfDistanceOne),((loc.locValue.longitude) + cosOfDistanceOne))
         println("locations = \(loc.locValueOne.latitude) \(loc.locValueOne.longitude)")
-        println("\(CalculateRouteDistance)")
+        println("\(loc.CalculateRouteDistance)")
         var locationMarkerTwo: GMSMarker!
         locationMarkerTwo = GMSMarker(position: loc.locValueOne)
         locationMarkerTwo.map = mapOverView
         
         loc.locValueTwo = CLLocationCoordinate2DMake( ((loc.locValueOne.latitude) - sinOfDistanceThree),((loc.locValueOne.longitude) + cosOfDistanceThree))
         println("locations = \(loc.locValueTwo.latitude) \(loc.locValueTwo.longitude)")
-        println("\(CalculateRouteDistance)")
+        println("\(loc.CalculateRouteDistance)")
         var locationMarkerThree: GMSMarker!
         locationMarkerThree = GMSMarker(position: loc.locValueTwo)
         locationMarkerThree.map = mapOverView
         
         loc.locValueThree = CLLocationCoordinate2DMake((((loc.locValue.latitude)) - sinOfDistanceThree),((loc.locValue.longitude) + cosOfDistanceThree))
         println("locations = \(loc.locValueThree.latitude) \(loc.locValueThree.longitude)")
-        println("\(CalculateRouteDistance)")
+        println("\(loc.CalculateRouteDistance)")
         var locationMarkerFour: GMSMarker!
         locationMarkerFour = GMSMarker(position: loc.locValueThree)
         locationMarkerFour.map = mapOverView
         }
         else if (degreeToRotate <= 180 && degreeToRotate > 90)  {
-            var degreeminus90 = Double(degreeToRotate - 90)
-            var oneEightyMinusDegree = Double(180 - degreeToRotate)
+            var degreeminus90 = Double(degreeToRotate - 90) * (M_PI/180)
+            var oneEightyMinusDegree = Double(180 - degreeToRotate) * (M_PI/180)
             
             var sinOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (sin(oneEightyMinusDegree)))
             var cosOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (cos(oneEightyMinusDegree)))
@@ -277,28 +302,28 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             loc.locValueOne = CLLocationCoordinate2DMake(((loc.locValue.latitude) - sinOfDistanceOne),((loc.locValue.longitude) + cosOfDistanceOne))
             println("locations = \(loc.locValueOne.latitude) \(loc.locValueOne.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerTwo: GMSMarker!
             locationMarkerTwo = GMSMarker(position: loc.locValueOne)
             locationMarkerTwo.map = mapOverView
             
             loc.locValueTwo = CLLocationCoordinate2DMake( ((loc.locValueOne.latitude) - sinOfDistanceThree),((loc.locValueOne.longitude) - cosOfDistanceThree))
             println("locations = \(loc.locValueTwo.latitude) \(loc.locValueTwo.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerThree: GMSMarker!
             locationMarkerThree = GMSMarker(position: loc.locValueTwo)
             locationMarkerThree.map = mapOverView
             
             loc.locValueThree = CLLocationCoordinate2DMake((((loc.locValue.latitude)) - sinOfDistanceThree),((loc.locValue.longitude) - cosOfDistanceThree))
             println("locations = \(loc.locValueThree.latitude) \(loc.locValueThree.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerFour: GMSMarker!
             locationMarkerFour = GMSMarker(position: loc.locValueThree)
             locationMarkerFour.map = mapOverView
         }
         
         else if (degreeToRotate <= 270 && degreeToRotate > 180)  {
-            var degreeminus270 = Double(270 - degreeToRotate)
+            var degreeminus270 = Double(270 - degreeToRotate) * (M_PI/180)
             var sinOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (sin(randomDegreeToRotate)))
             var cosOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (cos(randomDegreeToRotate)))
             
@@ -316,32 +341,33 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
             
             loc.locValueOne = CLLocationCoordinate2DMake(((loc.locValue.latitude) - sinOfDistanceOne),((loc.locValue.longitude) - cosOfDistanceOne))
             println("locations = \(loc.locValueOne.latitude) \(loc.locValueOne.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerTwo: GMSMarker!
             locationMarkerTwo = GMSMarker(position: loc.locValueOne)
             locationMarkerTwo.map = mapOverView
             
             loc.locValueTwo = CLLocationCoordinate2DMake( ((loc.locValueOne.latitude) - sinOfDistanceThree),((loc.locValueOne.longitude) + cosOfDistanceThree))
             println("locations = \(loc.locValueTwo.latitude) \(loc.locValueTwo.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerThree: GMSMarker!
             locationMarkerThree = GMSMarker(position: loc.locValueTwo)
             locationMarkerThree.map = mapOverView
             
             loc.locValueThree = CLLocationCoordinate2DMake((((loc.locValue.latitude)) - sinOfDistanceThree),((loc.locValue.longitude) + cosOfDistanceThree))
             println("locations = \(loc.locValueThree.latitude) \(loc.locValueThree.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerFour: GMSMarker!
             locationMarkerFour = GMSMarker(position: loc.locValueThree)
             locationMarkerFour.map = mapOverView
         }
         else if (degreeToRotate <= 360 && degreeToRotate > 270)  {
-            var degreeminus360 = Double(360 - degreeToRotate)
-            var sinOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (sin(randomDegreeToRotate)))
-            var cosOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (cos(randomDegreeToRotate)))
+            var three60minusdegree = Double(360 - degreeToRotate) * (M_PI/180)
+            var degreeminus270 = Double(degreeToRotate - 270) * (M_PI/180)
+            var sinOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (sin(three60minusdegree)))
+            var cosOfDistanceThree = (RouteDistanceCoordinateDividedBy4 * (cos(three60minusdegree)))
             
-            var sinOfDistanceOne =  (RouteDistanceCoordinateDividedBy4 * (sin(degreeminus360)))
-            var cosOfDistanceOne = (RouteDistanceCoordinateDividedBy4 * (cos(degreeminus360)))
+            var sinOfDistanceOne =  (RouteDistanceCoordinateDividedBy4 * (sin(degreeminus270)))
+            var cosOfDistanceOne = (RouteDistanceCoordinateDividedBy4 * (cos(degreeminus270)))
             println("\(sinOfDistanceOne)" + "\(cosOfDistanceOne)")
             
             
@@ -352,23 +378,23 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
             locationMarkerOne = GMSMarker(position: loc.locValue)
             locationMarkerOne.map = mapOverView
             
-            loc.locValueOne = CLLocationCoordinate2DMake(((loc.locValue.latitude) -  sinOfDistanceOne),((loc.locValue.longitude) + cosOfDistanceOne))
+            loc.locValueOne = CLLocationCoordinate2DMake(((loc.locValue.latitude) +  sinOfDistanceOne),((loc.locValue.longitude) - cosOfDistanceOne))
             println("locations = \(loc.locValueOne.latitude) \(loc.locValueOne.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerTwo: GMSMarker!
             locationMarkerTwo = GMSMarker(position: loc.locValueOne)
             locationMarkerTwo.map = mapOverView
             
             loc.locValueTwo = CLLocationCoordinate2DMake( ((loc.locValueOne.latitude) + sinOfDistanceThree),((loc.locValueOne.longitude) + cosOfDistanceThree))
             println("locations = \(loc.locValueTwo.latitude) \(loc.locValueTwo.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerThree: GMSMarker!
             locationMarkerThree = GMSMarker(position: loc.locValueTwo)
             locationMarkerThree.map = mapOverView
             
             loc.locValueThree = CLLocationCoordinate2DMake((((loc.locValue.latitude)) + sinOfDistanceThree),((loc.locValue.longitude) + cosOfDistanceThree))
             println("locations = \(loc.locValueThree.latitude) \(loc.locValueThree.longitude)")
-            println("\(CalculateRouteDistance)")
+            println("\(loc.CalculateRouteDistance)")
             var locationMarkerFour: GMSMarker!
             locationMarkerFour = GMSMarker(position: loc.locValueThree)
             locationMarkerFour.map = mapOverView

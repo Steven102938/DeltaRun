@@ -210,6 +210,24 @@
             </objects>
             <point key="canvasLocation" x="1668" y="664"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="orq-tK-U9J">
+            <objects>
+                <viewController id="PMN-pE-5Q6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SiP-LG-j03"/>
+                        <viewControllerLayoutGuide type="bottom" id="Weg-rK-1wk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Aiq-Nd-BdL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bYa-aJ-3uX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3028" y="664"/>
+        </scene>
         <!--Map Overview View Controller-->
         <scene sceneID="Mgx-JG-8l7">
             <objects>
@@ -237,16 +255,19 @@
                                     <action selector="regnerateRoute:" destination="kl2-G8-kzN" eventType="touchUpInside" id="cqg-eu-icC"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blh-75-yBh" customClass="GMSMapView">
+                                <rect key="frame" x="16" y="165" width="568" height="329"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zOU-5y-Zub">
                                 <rect key="frame" x="284" y="64" width="33" height="30"/>
                                 <state key="normal" title="RUN">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="PMN-pE-5Q6" kind="showDetail" id="oH2-B2-aVM"/>
+                                </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blh-75-yBh" customClass="GMSMapView">
-                                <rect key="frame" x="16" y="165" width="568" height="329"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -280,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Y2-iq-ekh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2432" y="677"/>
+            <point key="canvasLocation" x="2360" y="653"/>
         </scene>
         <!--Route History-->
         <scene sceneID="E1x-q5-RfU">

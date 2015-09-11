@@ -19,6 +19,7 @@
 		B02FD2081B8EBD23003579FF /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FD2071B8EBD23003579FF /* GlobalVariables.swift */; };
 		B02FD20A1B8ED19B003579FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02FD2091B8ED19B003579FF /* CoreLocation.framework */; };
 		B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */; };
+		B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0504C771BA11B2500745B80 /* DirectionsViewController.swift */; };
 		ED04EB7178D48C161F1E3A18 /* libPods-Run.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00A4355E6839AE2DB107A59 /* libPods-Run.a */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		B02FD2071B8EBD23003579FF /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		B02FD2091B8ED19B003579FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOverviewViewController.swift; sourceTree = "<group>"; };
+		B0504C771BA11B2500745B80 /* DirectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsViewController.swift; sourceTree = "<group>"; };
 		E00A4355E6839AE2DB107A59 /* libPods-Run.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Run.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,6 +110,7 @@
 		B01F762E1B86EDA700048E53 /* Run */ = {
 			isa = PBXGroup;
 			children = (
+				B0504C771BA11B2500745B80 /* DirectionsViewController.swift */,
 				B01F76331B86EDA700048E53 /* RunViewController.swift */,
 				B02FD2071B8EBD23003579FF /* GlobalVariables.swift */,
 				B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */,
@@ -296,6 +299,7 @@
 				B01F76341B86EDA700048E53 /* RunViewController.swift in Sources */,
 				B019AD591B87A614004B1690 /* UserDatabase.swift in Sources */,
 				B01F76541B86FEAE00048E53 /* RouteHistoryViewController.swift in Sources */,
+				B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */,
 				B01F76321B86EDA700048E53 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
