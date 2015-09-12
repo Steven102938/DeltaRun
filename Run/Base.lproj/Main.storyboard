@@ -210,65 +210,6 @@
             </objects>
             <point key="canvasLocation" x="1668" y="664"/>
         </scene>
-        <!--Directions View Controller-->
-        <scene sceneID="orq-tK-U9J">
-            <objects>
-                <viewController id="PMN-pE-5Q6" customClass="DirectionsViewController" customModule="Run" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="SiP-LG-j03"/>
-                        <viewControllerLayoutGuide type="bottom" id="Weg-rK-1wk"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Aiq-Nd-BdL" customClass="GMSMapView">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RmA-7V-sNH" customClass="GMSMapView">
-                                <rect key="frame" x="113" y="197" width="300" height="300"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ydE-2c-NXL">
-                                <rect key="frame" x="8" y="64" width="584" height="132"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8LX-rT-p33">
-                                        <rect key="frame" x="39" y="20" width="42" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zlk-Ps-JQo">
-                                        <rect key="frame" x="150" y="20" width="307" height="77"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ydE-2c-NXL" firstAttribute="top" secondItem="SiP-LG-j03" secondAttribute="bottom" constant="-9" id="0Xm-ch-iL2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ydE-2c-NXL" secondAttribute="trailing" constant="-16" id="MeD-aC-4yE"/>
-                            <constraint firstItem="ydE-2c-NXL" firstAttribute="top" secondItem="SiP-LG-j03" secondAttribute="bottom" constant="-9" id="gFs-9t-gQG"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="0Xm-ch-iL2"/>
-                                <exclude reference="MeD-aC-4yE"/>
-                                <exclude reference="gFs-9t-gQG"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="DirectionsMapView" destination="RmA-7V-sNH" id="EeH-Tb-xh3"/>
-                        <outlet property="NumberRouteDirections" destination="8LX-rT-p33" id="fBs-O5-dfn"/>
-                        <outlet property="TextRouteDirections" destination="Zlk-Ps-JQo" id="m0f-QD-dhQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bYa-aJ-3uX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3059" y="635"/>
-        </scene>
         <!--Map Overview View Controller-->
         <scene sceneID="Mgx-JG-8l7">
             <objects>
@@ -302,7 +243,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="PMN-pE-5Q6" kind="show" id="NV6-ho-mRZ"/>
+                                    <segue destination="9g0-nE-GTo" kind="show" id="1Pc-jL-m1V"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blh-75-yBh" customClass="GMSMapView">
@@ -343,6 +284,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Y2-iq-ekh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2360" y="653"/>
+        </scene>
+        <!--Directions View Controller-->
+        <scene sceneID="0oi-7T-1ol">
+            <objects>
+                <viewController id="9g0-nE-GTo" customClass="DirectionsViewController" customModule="Run" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="osE-Pn-WFS"/>
+                        <viewControllerLayoutGuide type="bottom" id="fgb-wZ-Ymw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="AfW-4x-C0i" customClass="d">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kKj-lL-x2l">
+                                <rect key="frame" x="16" y="72" width="568" height="117"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHL-Je-J8v">
+                                        <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmH-8O-kyP">
+                                        <rect key="frame" x="122" y="8" width="383" height="69"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8O-CO-6mg" customClass="GMSMapView">
+                                <rect key="frame" x="16" y="197" width="568" height="346"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fgb-wZ-Ymw" firstAttribute="top" secondItem="n8O-CO-6mg" secondAttribute="bottom" constant="8" id="REk-Qv-cm2"/>
+                            <constraint firstItem="kKj-lL-x2l" firstAttribute="trailing" secondItem="AfW-4x-C0i" secondAttribute="trailingMargin" id="g2A-Vx-Wwe"/>
+                            <constraint firstItem="n8O-CO-6mg" firstAttribute="leading" secondItem="AfW-4x-C0i" secondAttribute="leadingMargin" id="iiY-fL-6Ou"/>
+                            <constraint firstItem="n8O-CO-6mg" firstAttribute="top" secondItem="kKj-lL-x2l" secondAttribute="bottom" constant="8" id="oEX-bO-cNA"/>
+                            <constraint firstItem="n8O-CO-6mg" firstAttribute="trailing" secondItem="AfW-4x-C0i" secondAttribute="trailingMargin" id="qRp-tE-mzS"/>
+                            <constraint firstItem="kKj-lL-x2l" firstAttribute="top" secondItem="osE-Pn-WFS" secondAttribute="bottom" constant="8" id="rMZ-yd-L7r"/>
+                            <constraint firstItem="kKj-lL-x2l" firstAttribute="leading" secondItem="AfW-4x-C0i" secondAttribute="leadingMargin" id="vVt-OC-CNT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="DirectionsDistance" destination="rHL-Je-J8v" id="3aU-GX-WSm"/>
+                        <outlet property="DirectionsMapView" destination="n8O-CO-6mg" id="Sn2-NS-7kc"/>
+                        <outlet property="DirectionsText" destination="GmH-8O-kyP" id="eow-lR-yeZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VyY-cT-qqv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3066" y="625"/>
         </scene>
         <!--Route History-->
         <scene sceneID="E1x-q5-RfU">

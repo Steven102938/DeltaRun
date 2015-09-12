@@ -42,11 +42,8 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     @IBAction func Segue(sender: AnyObject) {
-        mainInstance.directionLocOne = loc.locValue
-        mainInstance.directionLocTwo = loc.locValueOne
-        mainInstance.directionLocThree = loc.locValueTwo
-        mainInstance.directionLocFour = loc.locValueThree
-        mainInstance.routeInfo = loc.selectedRoute
+        
+        
         
     }
    
@@ -76,6 +73,9 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     var destinationCoordinate: CLLocationCoordinate2D!
     var originMarker: GMSMarker!
     var destinationMarker: GMSMarker!
+    var waypointOne: GMSMarker!
+    var waypointTwo: GMSMarker!
+
     var didFindMyLocation = false
     var routePolyline: GMSPolyline!
     
@@ -133,6 +133,12 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
                             self.configureMapAndMarkersForRoute()
                             self.drawRoute()
                             self.displayRouteInfo()
+                        mainInstance.routeInfo = loc.selectedRoute
+                        mainInstance.directionLocOne = loc.locValue
+                        mainInstance.directionLocTwo = loc.locValueOne
+                        mainInstance.directionLocThree = loc.locValueTwo
+                        mainInstance.directionLocFour = loc.locValueThree
+                        
                         println(loc.selectedRoute)
                   
                       
@@ -165,21 +171,24 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     originMarker.icon = GMSMarker.markerImageWithColor(UIColor.greenColor())
     originMarker.title = "start"
     
+        waypointOne = GMSMarker(position: loc.locValueOne)
+        waypointOne.map = self.mapOverView
+        waypointOne.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+        waypointOne.title = "locValueOne"
+        
+        waypointTwo = GMSMarker(position: loc.locValueTwo)
+        waypointTwo.map = self.mapOverView
+        waypointTwo.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
+        waypointTwo.title = "locvaluetwo"
+
     destinationMarker = GMSMarker(position: loc.locValueThree)
     destinationMarker.map = self.mapOverView
     destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
     destinationMarker.title = "end"
         
-        destinationMarker = GMSMarker(position: loc.locValueTwo)
-        destinationMarker.map = self.mapOverView
-        destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
-        destinationMarker.title = "locvaluetwo"
-
+       
         
-        destinationMarker = GMSMarker(position: loc.locValueOne)
-        destinationMarker.map = self.mapOverView
-        destinationMarker.icon = GMSMarker.markerImageWithColor(UIColor.redColor())
-        destinationMarker.title = "locValueOne"
+        
 
     }
     
