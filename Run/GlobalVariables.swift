@@ -26,7 +26,7 @@ class Main {
         self.directionLocTwo = TempDirectionLocTwo
         self.directionLocThree = TempDirectionLocThree
         self.directionLocFour = TempDirectionLocFour
-
+        self.routeInfo = TempRouteInfo
     }
 }
 var defaultDirectionLoc = CLLocationCoordinate2DMake(0,0)

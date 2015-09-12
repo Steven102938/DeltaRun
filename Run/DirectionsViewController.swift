@@ -13,8 +13,16 @@ import GoogleMaps
 import CoreLocation
 
 class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    @IBOutlet weak var TextRouteDirections: UILabel!
+    @IBOutlet weak var NumberRouteDirections: UILabel!
+    @IBOutlet weak var DirectionsMapView: GMSMapView!
+   
     
-    @IBOutlet var DirectionsMapView: GMSMapView!
-    
+    struct global {
+        static var directions: Dictionary<NSObject, AnyObject>! = mainInstance.routeInfo
+        
+    }
+
     
 }
+

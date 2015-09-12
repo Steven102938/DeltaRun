@@ -47,6 +47,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         mainInstance.directionLocThree = loc.locValueTwo
         mainInstance.directionLocFour = loc.locValueThree
         mainInstance.routeInfo = loc.selectedRoute
+        
     }
    
     @IBAction func regnerateRoute(sender: AnyObject) -> Void {
@@ -451,7 +452,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         var destinationThree = MKMapItem(placemark: DestinationThreePlaceMark)
         
         
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(loc.locValue, zoom: 10)
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(loc.locValue, zoom: 11)
         mapOverView.camera = camera
        
         mapOverView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
