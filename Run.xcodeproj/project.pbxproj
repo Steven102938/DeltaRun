@@ -16,10 +16,15 @@
 		B01F76481B86EDA700048E53 /* RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F76471B86EDA700048E53 /* RunTests.swift */; };
 		B01F76541B86FEAE00048E53 /* RouteHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F76531B86FEAE00048E53 /* RouteHistoryViewController.swift */; };
 		B0282EC01B8CBE95003224BB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0282EBF1B8CBE95003224BB /* MapKit.framework */; };
+		B02A170B1BB3872E00D539F1 /* RouteTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02A170A1BB3872E00D539F1 /* RouteTracker.swift */; };
 		B02FD2081B8EBD23003579FF /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FD2071B8EBD23003579FF /* GlobalVariables.swift */; };
 		B02FD20A1B8ED19B003579FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02FD2091B8ED19B003579FF /* CoreLocation.framework */; };
 		B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */; };
+		B037B97F1BAFA24300209D75 /* RouteGenerateNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */; };
+		B046E17E1BB65AB000E58F83 /* RouteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B046E17D1BB65AB000E58F83 /* RouteInfo.swift */; };
+		B046E1821BB668C600E58F83 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B046E1811BB668C600E58F83 /* GraphView.swift */; };
 		B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0504C771BA11B2500745B80 /* DirectionsViewController.swift */; };
+		B0EB6DD51BBA575B00BF0B4B /* Run.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0EB6DD31BBA575B00BF0B4B /* Run.xcdatamodeld */; };
 		ED04EB7178D48C161F1E3A18 /* libPods-Run.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00A4355E6839AE2DB107A59 /* libPods-Run.a */; };
 /* End PBXBuildFile section */
 
@@ -49,10 +54,15 @@
 		B01F76471B86EDA700048E53 /* RunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunTests.swift; sourceTree = "<group>"; };
 		B01F76531B86FEAE00048E53 /* RouteHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteHistoryViewController.swift; sourceTree = "<group>"; };
 		B0282EBF1B8CBE95003224BB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B02A170A1BB3872E00D539F1 /* RouteTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTracker.swift; sourceTree = "<group>"; };
 		B02FD2071B8EBD23003579FF /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		B02FD2091B8ED19B003579FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOverviewViewController.swift; sourceTree = "<group>"; };
+		B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteGenerateNavigation.swift; path = ../RouteGenerateNavigation.swift; sourceTree = "<group>"; };
+		B046E17D1BB65AB000E58F83 /* RouteInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInfo.swift; sourceTree = "<group>"; };
+		B046E1811BB668C600E58F83 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		B0504C771BA11B2500745B80 /* DirectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsViewController.swift; sourceTree = "<group>"; };
+		B0EB6DD41BBA575B00BF0B4B /* Run.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Run.xcdatamodel; sourceTree = "<group>"; };
 		E00A4355E6839AE2DB107A59 /* libPods-Run.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Run.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,14 +120,20 @@
 		B01F762E1B86EDA700048E53 /* Run */ = {
 			isa = PBXGroup;
 			children = (
+				B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */,
+				B02A170A1BB3872E00D539F1 /* RouteTracker.swift */,
+				B046E17D1BB65AB000E58F83 /* RouteInfo.swift */,
 				B0504C771BA11B2500745B80 /* DirectionsViewController.swift */,
 				B01F76331B86EDA700048E53 /* RunViewController.swift */,
 				B02FD2071B8EBD23003579FF /* GlobalVariables.swift */,
 				B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */,
 				B019AD581B87A614004B1690 /* UserDatabase.swift */,
 				B01F76531B86FEAE00048E53 /* RouteHistoryViewController.swift */,
+				B046E1811BB668C600E58F83 /* GraphView.swift */,
 				B01F76381B86EDA700048E53 /* Images.xcassets */,
 				B01F76351B86EDA700048E53 /* Main.storyboard */,
+				B01F76311B86EDA700048E53 /* AppDelegate.swift */,
+				B0EB6DD31BBA575B00BF0B4B /* Run.xcdatamodeld */,
 				B01F762F1B86EDA700048E53 /* Supporting Files */,
 			);
 			path = Run;
@@ -127,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				B01F763A1B86EDA700048E53 /* LaunchScreen.xib */,
-				B01F76311B86EDA700048E53 /* AppDelegate.swift */,
 				B01F76301B86EDA700048E53 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -297,8 +312,13 @@
 				B02FD2081B8EBD23003579FF /* GlobalVariables.swift in Sources */,
 				B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */,
 				B01F76341B86EDA700048E53 /* RunViewController.swift in Sources */,
+				B0EB6DD51BBA575B00BF0B4B /* Run.xcdatamodeld in Sources */,
 				B019AD591B87A614004B1690 /* UserDatabase.swift in Sources */,
 				B01F76541B86FEAE00048E53 /* RouteHistoryViewController.swift in Sources */,
+				B02A170B1BB3872E00D539F1 /* RouteTracker.swift in Sources */,
+				B046E1821BB668C600E58F83 /* GraphView.swift in Sources */,
+				B046E17E1BB65AB000E58F83 /* RouteInfo.swift in Sources */,
+				B037B97F1BAFA24300209D75 /* RouteGenerateNavigation.swift in Sources */,
 				B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */,
 				B01F76321B86EDA700048E53 /* AppDelegate.swift in Sources */,
 			);
@@ -512,6 +532,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B0EB6DD31BBA575B00BF0B4B /* Run.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B0EB6DD41BBA575B00BF0B4B /* Run.xcdatamodel */,
+			);
+			currentVersion = B0EB6DD41BBA575B00BF0B4B /* Run.xcdatamodel */;
+			path = Run.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B01F76241B86EDA700048E53 /* Project object */;
 }

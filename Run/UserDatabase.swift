@@ -43,32 +43,52 @@ struct RouteDatabase {
     var coordinateFour: CLLocationCoordinate2D?
     var routeName: String?
     
+//    var defaultCoordinateOne = CLLocationCoordinate2DMake(33, 44)
+//    var defaultCoordinateTwo = CLLocationCoordinate2DMake(33, 44)
+//    var defaultCoordinateThree = CLLocationCoordinate2DMake(33, 44)
+//    var defaultCoordinateFour = CLLocationCoordinate2DMake(33, 44)
+//    
+    static var CoordinateOne = [String: CLLocationCoordinate2D]()
+    static var CoordinateTwo = [String: CLLocationCoordinate2D]()
+    static var CoordinateThree = [String: CLLocationCoordinate2D]()
+    static var CoordinateFour = [String: CLLocationCoordinate2D]()
+    static var RotateValue = [String: Double]()
+    static var Images = [String: UIImage]()
+    static var RouteName = [Int:String]()
+
+  
+//    static let routeDatabase: Dictionary<String, RouteDatabase> = {
+//        var theRouteDatabase = Dictionary<String, RouteDatabase>()
+//        if theRouteDatabase.count == 0 {
+//            
+//        }
+//        else{
+//            var defaultCoordinateOne = CLLocationCoordinate2DMake(33, 44)
+//            var defaultCoordinateTwo = CLLocationCoordinate2DMake(33, 44)
+//            var defaultCoordinateThree = CLLocationCoordinate2DMake(33, 44)
+//            var defaultCoordinateFour = CLLocationCoordinate2DMake(33, 44)
+//            
+//            for nameOfRoute in [
+//                RouteDatabase(coordinateOne: defaultCoordinateOne, coordinateTwo: defaultCoordinateTwo, coordinateThree: defaultCoordinateThree, coordinateFour: defaultCoordinateFour, routeName: "Default")
+//                
+//                    ]{
+//                    theRouteDatabase[nameOfRoute.routeName!] = nameOfRoute
+//                        
+//                        
+//                    
+//                }
+//            }
+//
+//        return theRouteDatabase
+//        }()
     
+//    static func returnCoordinates(routeName: String) -> RouteDatabase? {
+//        if let nameOfRoute = routeDatabase[routeName]{
+//            return nameOfRoute
+//        }
+//        return nil
+//        
+//    }
+//    
     
-    static func returnCoordinates(routeName: String) -> RouteDatabase? {
-        if let nameOfRoute = routeDatabase[routeName]{
-            return nameOfRoute
-        }
-        return nil
-    }
-    
-    static let routeDatabase: Dictionary<String, RouteDatabase> = {
-        var theRouteDatabase = Dictionary<String, RouteDatabase>()
-        if theRouteDatabase.count == 0 {
-            
-        }
-        else{
-            var defaultCoordinateOne = CLLocationCoordinate2DMake(33, 44)
-            var defaultCoordinateTwo = CLLocationCoordinate2DMake(33, 44)
-            var defaultCoordinateThree = CLLocationCoordinate2DMake(33, 44)
-            var defaultCoordinateFour = CLLocationCoordinate2DMake(33, 44)
-            
-            for nameOfRoute in [
-                RouteDatabase(coordinateOne: defaultCoordinateOne, coordinateTwo: defaultCoordinateTwo, coordinateThree: defaultCoordinateThree, coordinateFour: defaultCoordinateFour, routeName: "Default")
-                ]{
-                    theRouteDatabase[nameOfRoute.routeName!] = nameOfRoute
-            }
-        }
-        return theRouteDatabase
-        }()
 }

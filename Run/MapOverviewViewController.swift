@@ -13,20 +13,57 @@ import CoreLocation
 import Darwin
 
 class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
- 
+    var routeNumber:Int = 1
+
     @IBOutlet weak var mapOverView: GMSMapView!
     
     @IBAction func SaveRoute(sender: AnyObject) {
-        SaveRoute!.routeName = "pokemon"
-        SaveRoute!.coordinateOne = loc.locValueToSave
-        SaveRoute!.coordinateTwo = loc.locValueOne
-        SaveRoute!.coordinateThree = loc.locValueTwo
-        SaveRoute!.coordinateFour = loc.locValueThree
-        // append, add new dictionary
-        RouteDatabase(coordinateOne: loc.locValueToSave, coordinateTwo: loc.locValueOne, coordinateThree: loc.locValueTwo, coordinateFour: loc.locValueThree, routeName: "pokemon")
+        var names:String?
+        
+        UIGraphicsBeginImageContext(mapOverView.frame.size)
+        mapOverView.layer .renderInContext(UIGraphicsGetCurrentContext())
+        var screenshotOfMap:UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        var alert = UIAlertController(title: "New name",
+            message: "Add a new name",
+            preferredStyle: .Alert)
+        
+        let saveAction = UIAlertAction(title: "Save",
+            style: .Default) { (action: UIAlertAction!) -> Void in
+                
+                let textField = alert.textFields![0] as! UITextField
+                names = textField.text
+                RouteDatabase.CoordinateOne[names!] = loc.locValue
+                RouteDatabase.CoordinateOne[names!] = loc.locValueOne
+                RouteDatabase.CoordinateOne[names!] = loc.locValueTwo
+                RouteDatabase.CoordinateOne[names!] = loc.locValueThree
+                RouteDatabase.RotateValue[names!] = loc.randomRotate
+                RouteDatabase.Images[names!] = screenshotOfMap
+                RouteDatabase.RouteName[self.routeNumber] = names
+                println(RouteDatabase.RotateValue)
+                println(RouteDatabase.RouteName)
+                println(RouteDatabase.Images)
+           self.routeNumber++
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+            style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addTextFieldWithConfigurationHandler {
+            (textField: UITextField!) -> Void in
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert,
+            animated: true,
+            completion: nil)
+        println(names)
+      
     }
-    
-    
     struct loc {
         
         static var locValue = CLLocationCoordinate2D()
@@ -41,12 +78,11 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
-    @IBAction func Segue(sender: AnyObject) {
-        
-        
-        
+    @IBAction func Run(sender: AnyObject) {
+        mapOverView.myLocationEnabled = false
+  self.locationManager.stopUpdatingLocation()
     }
-   
+    
     @IBAction func regnerateRoute(sender: AnyObject) -> Void {
         loc.randomRotate = Double(arc4random_uniform(360))
         loc.selectedRoute = nil
@@ -384,6 +420,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
             loc.locValue = manager.location.coordinate
             startLatitude = (loc.locValue.latitude)
             startLongitude = (loc.locValue.longitude)
+            
             var locationMarkerOne: GMSMarker!
             locationMarkerOne = GMSMarker(position: loc.locValue)
             locationMarkerOne.map = mapOverView
@@ -469,119 +506,8 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.getDirections(nil, travelMode: nil)
 
     
-        //        let requestOne = MKDirectionsRequest()
-        //        requestOne.setSource(Beginning)
-        //        requestOne.setDestination(destinationOne)
-        //        requestOne.requestsAlternateRoutes = false
-        //       requestOne.transportType = MKDirectionsTransportType.Automobile
-        //
-        //        let requestTwo = MKDirectionsRequest()
-        //        requestTwo.setSource(destinationOne)
-        //        requestTwo.setDestination(destinationTwo)
-        //        requestTwo.requestsAlternateRoutes = false
-        //       requestTwo.transportType = MKDirectionsTransportType.Automobile
-        //
-        //        let requestThree = MKDirectionsRequest()
-        //        requestThree.setSource(destinationTwo)
-        //        requestThree.setDestination(destinationThree)
-        //        requestThree.requestsAlternateRoutes = false
-        //        requestThree.transportType = MKDirectionsTransportType.Automobile
-        //
-        //        let requestFour = MKDirectionsRequest()
-        //        requestFour.setSource(destinationThree)
-        //        requestFour.setDestination(Beginning)
-        //        requestFour.requestsAlternateRoutes = false
-        //        requestFour.transportType = MKDirectionsTransportType.Automobile
-        //
-        //        let directionsOne = MKDirections(request: requestOne)
-        //
-        //        directionsOne.calculateDirectionsWithCompletionHandler({(response: MKDirectionsResponse!, error: NSError!) in
-        //            if error != nil {
-        //                println()
-        //            }
-        //            else{
-        //                self.showRoute(response)
-        //            }
-        //            })
-        //
-        //        let directionsTwo = MKDirections(request: requestTwo)
-        //
-        //        directionsTwo.calculateDirectionsWithCompletionHandler({(response: MKDirectionsResponse!, error: NSError!) in
-        //            if error != nil {
-        //                println()
-        //            }
-        //            else{
-        //                self.showRoute(response)
-        //            }
-        //        })
-        //
-        //        let directionsThree = MKDirections(request: requestThree)
-        //
-        //        directionsThree.calculateDirectionsWithCompletionHandler({(response: MKDirectionsResponse!, error: NSError!) in
-        //            if error != nil {
-        //                println()
-        //            }
-        //            else{
-        //                self.showRoute(response)
-        //            }
-        //        })
-        //
-        //        let directionsFour = MKDirections(request: requestFour)
-        //
-        //        directionsFour.calculateDirectionsWithCompletionHandler({(response: MKDirectionsResponse!, error: NSError!) in
-        //            if error != nil {
-        //                println()
-        //            }
-        //            else{
-        //                self.showRoute(response)
-        //
-        //            }
-        //
-        //        })
-        //
         
         
-        //        var urlone: String = "http://maps.googleapis.com/maps/api/directions/xml?"
-        //            + "origin=\(locValue.latitude),\(locValue.longitude)" + "&destination=\(locValueThree.latitude),\(locValueThree.longitude)" + "&waypoints=\(locValueOne.latitude),\(locValueOne.longitude)" + "|\(locValueTwo.latitude),\(locValueTwo.longitude)&key=AIzaSyDmmaydVxcfknPDiUGCFo5lVkyx9Ue1GZg"
-        //
-        //        var urlString: String = urlone
-        //        var directionsURL = NSURL(string: urlString)!
-        //        var request = NSURLRequest(URL: directionsURL)
-        //        var queue: NSOperationQueue = NSOperationQueue()
-        //
-        //        NSURLConnection.sendAsynchronousRequest(request, queue: queue) { (response: NSURLResponse!,responseData: NSData!,error: NSError!) -> Void in
-        //
-        //        if !(error != nil) {
-        //
-        //                let path = NSBundle.mainBundle().pathForResource("data", ofType: "json")
-        //                let data: AnyObject? = NSData.dataWithContentsOfMappedFile(path!)
-        //
-        //                let json: AnyObject! = NSJSONSerialization.JSONObjectWithData(data! as! NSData, options: NSJSONReadingOptions.MutableContainers, error: nil)
-        //
-        //
-        //            // JSONObjectWithData(request.responseData(), options: NSJSONReadingMutableContainers, error: &error)
-        //            var pathLine: GMSPath? = GMSPath.pathFromEncodedPath(json["routes"][0]["overview_polyline"]["points"])
-        //            var singleLine: GMSPolyline = GMSPolyline.polylineWithPath(path)
-        //            singleLine.strokeWidth = 7
-        //            singleLine.strokeColor = UIColor.greenColor()
-        //            singleLine.map = self.mapOverView
-        //        }
-        //        else {
-        //            NSLog("facebook.com/truqchal%@", request.error())
-        //        }
-        //
-        //        }
-        
-    }
-    
-    func mapView(mapView: MKMapView!, rendererForOverlay
-        overlay: MKOverlay!) -> MKOverlayRenderer! {
-            let renderer = MKPolylineRenderer(overlay: overlay)
-            
-            renderer.strokeColor = UIColor.blueColor()
-            renderer.lineWidth = 5.0
-            return renderer
-            
     }
     
     func displayLocationInfo(placemark: CLPlacemark) {

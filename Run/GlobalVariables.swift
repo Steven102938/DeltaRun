@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 import GoogleMaps
 import CoreLocation
+import CoreData
 
 class Main {
     var GlobalDistanceToRun:Double?
@@ -19,16 +20,18 @@ class Main {
     var directionLocThree: CLLocationCoordinate2D
     var directionLocFour: CLLocationCoordinate2D
     var routeInfo: Dictionary<NSObject, AnyObject>!
+    var Database = [NSManagedObject]()
     
-    init(TempDistanceToRun:Double, TempDirectionLocOne: CLLocationCoordinate2D, TempDirectionLocTwo: CLLocationCoordinate2D, TempDirectionLocThree: CLLocationCoordinate2D, TempDirectionLocFour: CLLocationCoordinate2D, TempRouteInfo: Dictionary<NSObject, AnyObject>) {
+    init(TempDistanceToRun:Double, TempDirectionLocOne: CLLocationCoordinate2D, TempDirectionLocTwo: CLLocationCoordinate2D, TempDirectionLocThree: CLLocationCoordinate2D, TempDirectionLocFour: CLLocationCoordinate2D, TempRouteInfo: Dictionary<NSObject, AnyObject>, TempDatabase: [NSManagedObject]) {
      self.GlobalDistanceToRun = TempDistanceToRun
         self.directionLocOne = TempDirectionLocOne
         self.directionLocTwo = TempDirectionLocTwo
         self.directionLocThree = TempDirectionLocThree
         self.directionLocFour = TempDirectionLocFour
         self.routeInfo = TempRouteInfo
+        self.Database = TempDatabase
     }
 }
 var defaultDirectionLoc = CLLocationCoordinate2DMake(0,0)
 var defaultDictionary = [:]
-var mainInstance = Main(TempDistanceToRun: 0, TempDirectionLocOne: defaultDirectionLoc, TempDirectionLocTwo: defaultDirectionLoc, TempDirectionLocThree: defaultDirectionLoc, TempDirectionLocFour: defaultDirectionLoc, TempRouteInfo: defaultDictionary as Dictionary<NSObject, AnyObject>)
+var mainInstance = Main(TempDistanceToRun: 0, TempDirectionLocOne: defaultDirectionLoc, TempDirectionLocTwo: defaultDirectionLoc, TempDirectionLocThree: defaultDirectionLoc, TempDirectionLocFour: defaultDirectionLoc, TempRouteInfo: defaultDictionary as Dictionary<NSObject, AnyObject>, TempDatabase: [NSManagedObject]())
