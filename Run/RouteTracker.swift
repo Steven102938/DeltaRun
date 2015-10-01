@@ -16,7 +16,10 @@ let DetailSegueName = "RunDetails"
 
 class RouteTracker: UIViewController, CLLocationManagerDelegate {
     var didFindMyLocation = false
-    var Run = [NSManagedObject]()
+//    var Run = [NSManagedObject]()
+    var run: Run!
+    var managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+
 
     @IBOutlet weak var MapTracker: GMSMapView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -60,44 +63,76 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
     var locations = [CLLocation]()
     
     func saveRun() {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-//
-//        for location in locations{
-//
-//            let entity =  NSEntityDescription.entityForName("RunCoordinates",
-//                inManagedObjectContext:
-//                managedContext)
-//            let coordinateToSave = NSManagedObject(entity: entity!,
-//                insertIntoManagedObjectContext:managedContext)
-//            
-//            coordinateToSave.setValue(location.coordinate.latitude, forKey: "latitude")
-//            coordinateToSave.setValue(location.coordinate.longitude, forKey: "longitude")
-//
-//        }
         
-        //2
-        let entity =  NSEntityDescription.entityForName("RunInfo",
-            inManagedObjectContext:
-            managedContext)
+
         
-        let person = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext:managedContext)
+            
+        let savedRun: Run = NSEntityDescription.insertNewObjectForEntityForName("RunInfo",
+            inManagedObjectContext: managedObjectContext) as! Run
+        savedRun.distance = distance
+        savedRun.duration = seconds
+        savedRun.timestamp = NSDate()
+        println(savedRun.distance)
+        // 2
+        var savedLocations = [Location]()
+        for location in locations {
+            let savedLocation = NSEntityDescription.insertNewObjectForEntityForName("Location",
+                inManagedObjectContext: managedObjectContext) as! Location
+            savedLocation.timestamp = location.timestamp
+            savedLocation.latitude = location.coordinate.latitude
+            savedLocation.longitude = location.coordinate.longitude
+            savedLocations.append(savedLocation)
         
-        //3
-        person.setValue(distance, forKey: "distance")
-        person.setValue(seconds, forKey: "duration")
-        person.setValue(NSDate(), forKey: "timestamp")
         
-        //4
+        savedRun.locations = NSOrderedSet(array: savedLocations)
+        run = savedRun
+        mainInstance.Database = run
+        }
+        // 3
         var error: NSError?
-        if !managedContext.save(&error) {
-            println("Could not save \(error), \(error?.userInfo)")
-        }  
-        //5
-        Run.append(person)
-        mainInstance.Database = Run
-        println(Run.count)
+        let success = managedObjectContext.save(&error)
+        if !success {
+            println("Could not save the run!")
+            
+        }
+//    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        let managedContext = appDelegate.managedObjectContext!
+////
+////        for location in locations{
+////
+////            let entity =  NSEntityDescription.entityForName("RunCoordinates",
+////                inManagedObjectContext:
+////                managedContext)
+////            let coordinateToSave = NSManagedObject(entity: entity!,
+////                insertIntoManagedObjectContext:managedContext)
+////            
+////            coordinateToSave.setValue(location.coordinate.latitude, forKey: "latitude")
+////            coordinateToSave.setValue(location.coordinate.longitude, forKey: "longitude")
+////
+////        }
+//        
+//        //2
+//        let entity =  NSEntityDescription.entityForName("RunInfo",
+//            inManagedObjectContext:
+//            managedContext)
+//        
+//        let person = NSManagedObject(entity: entity!,
+//            insertIntoManagedObjectContext:managedContext)
+//        
+//        //3
+//        person.setValue(distance, forKey: "distance")
+//        person.setValue(seconds, forKey: "duration")
+//        person.setValue(NSDate(), forKey: "timestamp")
+//        
+//        //4
+//        var error: NSError?
+//        if !managedContext.save(&error) {
+//            println("Could not save \(error), \(error?.userInfo)")
+//        }  
+//        //5
+//        Run.append(person)
+//        mainInstance.Database = Run
+//        println(Run.count)
 
     }
     func eachSecond(timer: NSTimer) {

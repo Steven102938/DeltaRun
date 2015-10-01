@@ -20,9 +20,9 @@ class Main {
     var directionLocThree: CLLocationCoordinate2D
     var directionLocFour: CLLocationCoordinate2D
     var routeInfo: Dictionary<NSObject, AnyObject>!
-    var Database = [NSManagedObject]()
+    var Database: Run?
     
-    init(TempDistanceToRun:Double, TempDirectionLocOne: CLLocationCoordinate2D, TempDirectionLocTwo: CLLocationCoordinate2D, TempDirectionLocThree: CLLocationCoordinate2D, TempDirectionLocFour: CLLocationCoordinate2D, TempRouteInfo: Dictionary<NSObject, AnyObject>, TempDatabase: [NSManagedObject]) {
+    init(TempDistanceToRun:Double, TempDirectionLocOne: CLLocationCoordinate2D, TempDirectionLocTwo: CLLocationCoordinate2D, TempDirectionLocThree: CLLocationCoordinate2D, TempDirectionLocFour: CLLocationCoordinate2D, TempRouteInfo: Dictionary<NSObject, AnyObject>, TempDatabase: Run!) {
      self.GlobalDistanceToRun = TempDistanceToRun
         self.directionLocOne = TempDirectionLocOne
         self.directionLocTwo = TempDirectionLocTwo
@@ -34,4 +34,8 @@ class Main {
 }
 var defaultDirectionLoc = CLLocationCoordinate2DMake(0,0)
 var defaultDictionary = [:]
-var mainInstance = Main(TempDistanceToRun: 0, TempDirectionLocOne: defaultDirectionLoc, TempDirectionLocTwo: defaultDirectionLoc, TempDirectionLocThree: defaultDirectionLoc, TempDirectionLocFour: defaultDirectionLoc, TempRouteInfo: defaultDictionary as Dictionary<NSObject, AnyObject>, TempDatabase: [NSManagedObject]())
+let managedObjectContext:NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+let savedRun: Run = NSEntityDescription.insertNewObjectForEntityForName("RunInfo",
+    inManagedObjectContext: managedObjectContext!) as! Run
+var run: Run = savedRun
+var mainInstance = Main(TempDistanceToRun: 0, TempDirectionLocOne: defaultDirectionLoc, TempDirectionLocTwo: defaultDirectionLoc, TempDirectionLocThree: defaultDirectionLoc, TempDirectionLocFour: defaultDirectionLoc, TempRouteInfo: defaultDictionary as Dictionary<NSObject, AnyObject>, TempDatabase: run)

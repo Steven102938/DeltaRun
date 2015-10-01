@@ -15,23 +15,15 @@ import HealthKit
 
 
 class RouteInfo: UIViewController {
-    var Database = [NSManagedObject]()
+    var run: Run = mainInstance.Database!
+
+    let managedObjectContext:NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+
+
     @IBOutlet weak var paceLabel: UILabel!
     
     override func viewDidLoad() {
-    Database = mainInstance.Database
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext!
-        let entity =  NSEntityDescription.entityForName("RunInfo",
-            inManagedObjectContext:
-            managedContext)
-        
-        let person = NSManagedObject(entity: entity!,
-            insertIntoManagedObjectContext:managedContext)
-        println(Database.count)
-        var pokemon = 1
-        let currentRun = Database[pokemon]
-    println(currentRun.valueForKey("distance") as? String)
+     println(run.distance.doubleValue)
     }
         //5
         

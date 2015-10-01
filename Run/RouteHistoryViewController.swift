@@ -16,6 +16,8 @@ class RouteHistory: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableViewObject: UITableView!
    
     var number = 1
+    let runs = RunManager.runs()
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         if RouteDatabase.RouteName.count >= 1 {
@@ -43,7 +45,8 @@ class RouteHistory: UIViewController, UITableViewDelegate {
             
         }
         else{
-        cell.routeName.text = name
+        var run = runs[indexPath.row]
+        cell.routeName.text = "\(run.distance.doubleValue)"
         cell.mapImage.image = RouteDatabase.Images[name!]!
         cell.DetailSegue.setTitle("sfd", forState: .Normal )
         }
