@@ -4,16 +4,18 @@
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="run" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="RunInfo" inverseName="locations" inverseEntity="RunInfo" syncable="YES"/>
+        <relationship name="runinfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RunInfo" inverseName="location" inverseEntity="RunInfo" syncable="YES"/>
     </entity>
-    <entity name="RunInfo" representedClassName="Run.Run" syncable="YES">
+    <entity name="RunInfo" representedClassName="Run.RunInfo" syncable="YES">
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="locations" optional="YES" toMany="YES" deletionRule="No Action" ordered="YES" destinationEntity="Location" inverseName="run" inverseEntity="Location" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="runinfo" inverseEntity="Location" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Location" positionX="-18" positionY="54" width="128" height="30"/>
-        <element name="RunInfo" positionX="-27" positionY="18" width="128" height="30"/>
+        <element name="Location" positionX="-36" positionY="9" width="128" height="105"/>
+        <element name="RunInfo" positionX="-54" positionY="-9" width="128" height="135"/>
     </elements>
 </model>

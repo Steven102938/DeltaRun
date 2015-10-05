@@ -11,9 +11,11 @@ import MapKit
 import GoogleMaps
 import CoreLocation
 import Darwin
-
+import CoreData
 class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var routeNumber:Int = 1
+    var managedObjectContext: NSManagedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    var locations = [CLLocation]()
 
     @IBOutlet weak var mapOverView: GMSMapView!
     
@@ -32,19 +34,51 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         let saveAction = UIAlertAction(title: "Save",
             style: .Default) { (action: UIAlertAction!) -> Void in
                 
-                let textField = alert.textFields![0] as! UITextField
-                names = textField.text
-                RouteDatabase.CoordinateOne[names!] = loc.locValue
-                RouteDatabase.CoordinateOne[names!] = loc.locValueOne
-                RouteDatabase.CoordinateOne[names!] = loc.locValueTwo
-                RouteDatabase.CoordinateOne[names!] = loc.locValueThree
-                RouteDatabase.RotateValue[names!] = loc.randomRotate
-                RouteDatabase.Images[names!] = screenshotOfMap
-                RouteDatabase.RouteName[self.routeNumber] = names
-                println(RouteDatabase.RotateValue)
-                println(RouteDatabase.RouteName)
-                println(RouteDatabase.Images)
-           self.routeNumber++
+                   
+                    let savedRun = NSEntityDescription.entityForName("RunInfo",
+                        inManagedObjectContext: self.managedObjectContext)
+                    let runInfo = RunInfo(entity: savedRun!, insertIntoManagedObjectContext: self.managedObjectContext)
+                    let imageData = UIImageJPEGRepresentation(screenshotOfMap, 1)
+                    runInfo.image = imageData
+                    runInfo.distance = self.totalDistanceInMeters
+                    runInfo.duration = self.totalDurationInSeconds
+                    runInfo.timestamp = NSDate()
+                    runInfo.name = "recent"
+                    // 2
+                    
+                    var savedLocations = [Location]()
+                    for location in self.locations {
+                        let savedRun = NSEntityDescription.entityForName("Location",
+                            inManagedObjectContext: self.managedObjectContext)
+                        let savedlocation = Location(entity: savedRun!, insertIntoManagedObjectContext: self.managedObjectContext)
+                        
+                        savedlocation.timestamp = location.timestamp
+                        savedlocation.latitude = location.coordinate.latitude
+                        savedlocation.longitude = location.coordinate.longitude
+                        savedLocations.append(savedlocation)
+                        
+                    }
+                
+                    // 3
+                    var error: NSError?
+                    self.managedObjectContext.save(&error)
+                    
+                    
+                
+
+//                let textField = alert.textFields![0] as! UITextField
+//                names = textField.text
+//                RouteDatabase.CoordinateOne[names!] = loc.locValue
+//                RouteDatabase.CoordinateOne[names!] = loc.locValueOne
+//                RouteDatabase.CoordinateOne[names!] = loc.locValueTwo
+//                RouteDatabase.CoordinateOne[names!] = loc.locValueThree
+//                RouteDatabase.RotateValue[names!] = loc.randomRotate
+//                RouteDatabase.Images[names!] = screenshotOfMap
+//                RouteDatabase.RouteName[self.routeNumber] = names
+//                println(RouteDatabase.RotateValue)
+//                println(RouteDatabase.RouteName)
+//                println(RouteDatabase.Images)
+//           self.routeNumber++
         }
         
         let cancelAction = UIAlertAction(title: "Cancel",
@@ -230,7 +264,11 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     func drawRoute() {
         let route = self.overviewPolyline["points"] as! String
-        
+        var CLLocationtemp:[CLLocation] = decodePolyline(route, precision: 1)!
+        for locations in CLLocationtemp{
+        self.locations.append(locations)
+        }
+
         let path: GMSPath = GMSPath(fromEncodedPath: route)
         routePolyline = GMSPolyline(path: path)
         routePolyline.map = mapOverView

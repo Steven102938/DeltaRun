@@ -25,7 +25,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6V-G2-gPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="780"/>
+            <point key="canvasLocation" x="62" y="728"/>
         </scene>
         <!--Item-->
         <scene sceneID="tne-QT-ifu">
@@ -58,10 +58,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cli-YX-wIx" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="293" width="600" height="307"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ZAz-gg-i1J">
                                 <rect key="frame" x="243" y="148" width="114" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -104,8 +100,26 @@
                                     <action selector="StartTrack:" destination="2gs-Lq-GDB" eventType="touchUpInside" id="1JJ-6w-VSq"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9br-eC-aJp">
+                                <rect key="frame" x="122" y="198" width="34" height="30"/>
+                                <state key="normal" title="back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="QEB-7O-I57" kind="show" id="rQt-0h-bsT"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cli-YX-wIx" customClass="GMSMapView">
+                                <rect key="frame" x="5" y="293" width="585" height="299"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Cli-YX-wIx" firstAttribute="leading" secondItem="ouj-LO-kBJ" secondAttribute="leadingMargin" constant="-11" id="71m-lZ-LpR"/>
+                            <constraint firstItem="hbB-zV-fge" firstAttribute="top" secondItem="Cli-YX-wIx" secondAttribute="bottom" constant="8" id="aAv-Du-stz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Cli-YX-wIx" secondAttribute="trailing" constant="-6" id="pAo-Nm-JSf"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="MapTracker" destination="Cli-YX-wIx" id="cfZ-3p-svh"/>
@@ -119,7 +133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ST2-cV-kJa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2482" y="347"/>
+            <point key="canvasLocation" x="2236" y="389"/>
         </scene>
         <!--Run View Controller-->
         <scene sceneID="3kD-Wn-CpA">
@@ -359,36 +373,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQq-tN-TsO" customClass="GMSMapView">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQq-tN-TsO" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="68" width="600" height="332"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1K-QC-7iq" customClass="GraphView" customModule="Run" customModuleProvider="target">
-                                <rect key="frame" x="396" y="408" width="204" height="150"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Pace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-ur-QmF">
+                                <rect key="frame" x="44" y="431" width="322" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tF-LU-e3e">
+                                <rect key="frame" x="44" y="489" width="35" height="30"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2gs-Lq-GDB" kind="show" id="7q0-cV-PeK"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCc-zs-xrA">
+                                <rect key="frame" x="44" y="460" width="322" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1K-QC-7iq" customClass="GraphView" customModule="Run" customModuleProvider="target">
+                                <rect key="frame" x="374" y="408" width="219" height="150"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Pace" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRz-ur-QmF">
-                                <rect key="frame" x="47" y="431" width="39" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCc-zs-xrA">
-                                <rect key="frame" x="44" y="460" width="38" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="h1K-QC-7iq" secondAttribute="trailing" constant="6" id="1LP-kY-DH2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QQq-tN-TsO" secondAttribute="trailing" constant="-8" id="3q3-9g-tBi"/>
+                            <constraint firstItem="h1K-QC-7iq" firstAttribute="leading" secondItem="PRz-ur-QmF" secondAttribute="trailing" constant="8" id="4C8-dO-Zdk"/>
+                            <constraint firstItem="zCc-zs-xrA" firstAttribute="leading" secondItem="HWP-2g-W8R" secondAttribute="leadingMargin" constant="28" id="bRa-g8-2Sf"/>
+                            <constraint firstItem="PRz-ur-QmF" firstAttribute="leading" secondItem="HWP-2g-W8R" secondAttribute="leadingMargin" constant="28" id="edW-xT-VGT"/>
+                            <constraint firstItem="h1K-QC-7iq" firstAttribute="leading" secondItem="zCc-zs-xrA" secondAttribute="trailing" constant="8" id="mS3-Uf-3n1"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="paceLabel" destination="zCc-zs-xrA" id="P77-Wa-KGy"/>
+                        <outlet property="paceLabel" destination="PRz-ur-QmF" id="c8m-qP-btc"/>
+                        <outlet property="timeLabel" destination="zCc-zs-xrA" id="IJT-hR-qLN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Si5-fg-o1a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3158" y="361"/>
+            <point key="canvasLocation" x="2985" y="389"/>
         </scene>
         <!--Map Overview View Controller-->
         <scene sceneID="Mgx-JG-8l7">
@@ -421,10 +453,6 @@
                                     <segue destination="9g0-nE-GTo" kind="show" id="1Pc-jL-m1V"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blh-75-yBh" customClass="GMSMapView">
-                                <rect key="frame" x="16" y="165" width="568" height="329"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBu-VV-QNO">
                                 <rect key="frame" x="360" y="127" width="80" height="30"/>
                                 <state key="normal" title="Save Route">
@@ -443,6 +471,10 @@
                                     <segue destination="sR3-e7-3pB" kind="showDetail" id="ECG-rw-7fS"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="blh-75-yBh" customClass="GMSMapView">
+                                <rect key="frame" x="16" y="165" width="568" height="329"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -720,14 +752,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIg-Ho-AuH">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIg-Ho-AuH">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCW-BZ-aE4" customClass="GraphView" customModule="Run" customModuleProvider="target">
                                         <rect key="frame" x="388" y="408" width="204" height="150"/>
                                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-5n-8b1">
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0wD-5n-8b1">
                                         <rect key="frame" x="8" y="154" width="584" height="246"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -747,6 +779,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ECG-rw-7fS"/>
+        <segue reference="AO3-qo-HzF"/>
+        <segue reference="qC2-dG-bCh"/>
+        <segue reference="Zb0-wI-dxC"/>
     </inferredMetricsTieBreakers>
 </document>

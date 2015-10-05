@@ -10,18 +10,27 @@ import UIKit
 import MapKit
 import CoreLocation
 import Darwin
-
+import CoreData
 class RouteHistory: UIViewController, UITableViewDelegate {
 
     @IBOutlet weak var tableViewObject: UITableView!
    
     var number = 1
-    let runs = RunManager.runs()
+    let managedObjectContext:NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    var RunInfoData = [RunInfo]()
+   
+
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        if RouteDatabase.RouteName.count >= 1 {
-        return RouteDatabase.RouteName.count
+        
+        var error: NSError?
+        let request = NSFetchRequest(entityName: "RunInfo")
+        RunInfoData = managedObjectContext?.executeFetchRequest(request, error: &error) as! [RunInfo]
+        var routeCount = RunInfoData.count
+
+        if  routeCount >= 1 {
+        return routeCount
         }
         else {
             var one = 1
@@ -37,27 +46,33 @@ class RouteHistory: UIViewController, UITableViewDelegate {
         var identifier:String = "MapReuse"
         let cell:mapCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! mapCell
         var name = RouteDatabase.RouteName[number]
-        println(name)
-        if RouteDatabase.RouteName.count == 0 {
+        var error: NSError?
+        let request = NSFetchRequest(entityName: "RunInfo")
+        RunInfoData = managedObjectContext?.executeFetchRequest(request, error: &error) as! [RunInfo]
+        var routeCount = RunInfoData.count
+        var RunInfoForTable = RunInfoData[indexPath.row]
+        
+        if routeCount == 0 {
             cell.routeName.text = "No Routes"
             tableViewObject.rowHeight = 900
             cell.DetailSegue.setTitle("generate route", forState: .Normal)
-            
         }
         else{
-        var run = runs[indexPath.row]
-        cell.routeName.text = "\(run.distance.doubleValue)"
-        cell.mapImage.image = RouteDatabase.Images[name!]!
+        
+        cell.routeName.text = RunInfoForTable.name
+        cell.mapImage.image = UIImage(data: RunInfoForTable.image)
         cell.DetailSegue.setTitle("sfd", forState: .Normal )
         }
         
-        number++
         
         
         return cell
         
     }
-    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if let detailViewController = segue.destinationViewController as? RouteGenerateNavigation {
+//        }
+//    }
  
 }
 class mapCell:UITableViewCell {

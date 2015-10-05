@@ -20,15 +20,14 @@
 		B02FD2081B8EBD23003579FF /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FD2071B8EBD23003579FF /* GlobalVariables.swift */; };
 		B02FD20A1B8ED19B003579FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02FD2091B8ED19B003579FF /* CoreLocation.framework */; };
 		B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */; };
-		B033F2001BBCE6CF0084E982 /* RunManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B033F1FF1BBCE6CF0084E982 /* RunManager.swift */; };
-		B033F2021BBCE7F60084E982 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B033F2011BBCE7F60084E982 /* HistoryViewController.swift */; };
 		B037B97F1BAFA24300209D75 /* RouteGenerateNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */; };
+		B039DB2D1BC07FBD004D0DF2 /* Run.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B039DB2B1BC07FBD004D0DF2 /* Run.xcdatamodeld */; };
+		B039DB311BC0BA7F004D0DF2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039DB301BC0BA7F004D0DF2 /* Location.swift */; };
+		B04472071BC1971D00CADBC8 /* RunInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04472061BC1971D00CADBC8 /* RunInfo.swift */; };
+		B04472091BC1AC9C00CADBC8 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04472081BC1AC9C00CADBC8 /* Polyline.swift */; };
 		B046E17E1BB65AB000E58F83 /* RouteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B046E17D1BB65AB000E58F83 /* RouteInfo.swift */; };
 		B046E1821BB668C600E58F83 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B046E1811BB668C600E58F83 /* GraphView.swift */; };
 		B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0504C771BA11B2500745B80 /* DirectionsViewController.swift */; };
-		B05055451BBB97A700590577 /* Run.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05055431BBB97A700590577 /* Run.swift */; };
-		B05055461BBB97A700590577 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05055441BBB97A700590577 /* Location.swift */; };
-		B0EB6DD51BBA575B00BF0B4B /* Run.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B0EB6DD31BBA575B00BF0B4B /* Run.xcdatamodeld */; };
 		ED04EB7178D48C161F1E3A18 /* libPods-Run.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E00A4355E6839AE2DB107A59 /* libPods-Run.a */; };
 /* End PBXBuildFile section */
 
@@ -62,15 +61,14 @@
 		B02FD2071B8EBD23003579FF /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		B02FD2091B8ED19B003579FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOverviewViewController.swift; sourceTree = "<group>"; };
-		B033F1FF1BBCE6CF0084E982 /* RunManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunManager.swift; sourceTree = "<group>"; };
-		B033F2011BBCE7F60084E982 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteGenerateNavigation.swift; path = ../RouteGenerateNavigation.swift; sourceTree = "<group>"; };
+		B039DB2C1BC07FBD004D0DF2 /* Run.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Run.xcdatamodel; sourceTree = "<group>"; };
+		B039DB301BC0BA7F004D0DF2 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		B04472061BC1971D00CADBC8 /* RunInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunInfo.swift; sourceTree = "<group>"; };
+		B04472081BC1AC9C00CADBC8 /* Polyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
 		B046E17D1BB65AB000E58F83 /* RouteInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInfo.swift; sourceTree = "<group>"; };
 		B046E1811BB668C600E58F83 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		B0504C771BA11B2500745B80 /* DirectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionsViewController.swift; sourceTree = "<group>"; };
-		B05055431BBB97A700590577 /* Run.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Run.swift; sourceTree = SOURCE_ROOT; };
-		B05055441BBB97A700590577 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Location.swift; path = ../Location.swift; sourceTree = "<group>"; };
-		B0EB6DD41BBA575B00BF0B4B /* Run.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Run.xcdatamodel; sourceTree = "<group>"; };
 		E00A4355E6839AE2DB107A59 /* libPods-Run.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Run.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -128,15 +126,14 @@
 		B01F762E1B86EDA700048E53 /* Run */ = {
 			isa = PBXGroup;
 			children = (
-				B033F1FF1BBCE6CF0084E982 /* RunManager.swift */,
-				B033F2011BBCE7F60084E982 /* HistoryViewController.swift */,
-				B05055471BBB98D000590577 /* Model */,
+				B05055471BBB98D000590577 /* CoreData */,
 				B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */,
 				B02A170A1BB3872E00D539F1 /* RouteTracker.swift */,
 				B046E17D1BB65AB000E58F83 /* RouteInfo.swift */,
 				B0504C771BA11B2500745B80 /* DirectionsViewController.swift */,
 				B01F76331B86EDA700048E53 /* RunViewController.swift */,
 				B02FD2071B8EBD23003579FF /* GlobalVariables.swift */,
+				B04472081BC1AC9C00CADBC8 /* Polyline.swift */,
 				B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */,
 				B019AD581B87A614004B1690 /* UserDatabase.swift */,
 				B01F76531B86FEAE00048E53 /* RouteHistoryViewController.swift */,
@@ -144,7 +141,7 @@
 				B01F76381B86EDA700048E53 /* Images.xcassets */,
 				B01F76351B86EDA700048E53 /* Main.storyboard */,
 				B01F76311B86EDA700048E53 /* AppDelegate.swift */,
-				B0EB6DD31BBA575B00BF0B4B /* Run.xcdatamodeld */,
+				B039DB2B1BC07FBD004D0DF2 /* Run.xcdatamodeld */,
 				B01F762F1B86EDA700048E53 /* Supporting Files */,
 			);
 			path = Run;
@@ -176,13 +173,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		B05055471BBB98D000590577 /* Model */ = {
+		B05055471BBB98D000590577 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				B05055441BBB97A700590577 /* Location.swift */,
-				B05055431BBB97A700590577 /* Run.swift */,
+				B04472061BC1971D00CADBC8 /* RunInfo.swift */,
+				B039DB301BC0BA7F004D0DF2 /* Location.swift */,
 			);
-			name = Model;
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		E98B670160575E608B0AC42E /* Pods */ = {
@@ -330,21 +327,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B02FD2081B8EBD23003579FF /* GlobalVariables.swift in Sources */,
+				B039DB2D1BC07FBD004D0DF2 /* Run.xcdatamodeld in Sources */,
 				B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */,
-				B05055451BBB97A700590577 /* Run.swift in Sources */,
 				B01F76341B86EDA700048E53 /* RunViewController.swift in Sources */,
-				B0EB6DD51BBA575B00BF0B4B /* Run.xcdatamodeld in Sources */,
 				B019AD591B87A614004B1690 /* UserDatabase.swift in Sources */,
-				B05055461BBB97A700590577 /* Location.swift in Sources */,
 				B01F76541B86FEAE00048E53 /* RouteHistoryViewController.swift in Sources */,
+				B039DB311BC0BA7F004D0DF2 /* Location.swift in Sources */,
 				B02A170B1BB3872E00D539F1 /* RouteTracker.swift in Sources */,
 				B046E1821BB668C600E58F83 /* GraphView.swift in Sources */,
 				B046E17E1BB65AB000E58F83 /* RouteInfo.swift in Sources */,
 				B037B97F1BAFA24300209D75 /* RouteGenerateNavigation.swift in Sources */,
-				B033F2021BBCE7F60084E982 /* HistoryViewController.swift in Sources */,
 				B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */,
-				B033F2001BBCE6CF0084E982 /* RunManager.swift in Sources */,
+				B04472091BC1AC9C00CADBC8 /* Polyline.swift in Sources */,
 				B01F76321B86EDA700048E53 /* AppDelegate.swift in Sources */,
+				B04472071BC1971D00CADBC8 /* RunInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,12 +554,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B0EB6DD31BBA575B00BF0B4B /* Run.xcdatamodeld */ = {
+		B039DB2B1BC07FBD004D0DF2 /* Run.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B0EB6DD41BBA575B00BF0B4B /* Run.xcdatamodel */,
+				B039DB2C1BC07FBD004D0DF2 /* Run.xcdatamodel */,
 			);
-			currentVersion = B0EB6DD41BBA575B00BF0B4B /* Run.xcdatamodel */;
+			currentVersion = B039DB2C1BC07FBD004D0DF2 /* Run.xcdatamodel */;
 			path = Run.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
