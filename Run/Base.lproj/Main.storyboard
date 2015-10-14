@@ -438,7 +438,7 @@
             </objects>
             <point key="canvasLocation" x="2985" y="389"/>
         </scene>
-        <!--Map Overview View Controller-->
+        <!--Title-->
         <scene sceneID="Mgx-JG-8l7">
             <objects>
                 <viewController id="kl2-G8-kzN" customClass="MapOverviewViewController" customModule="Run" customModuleProvider="target" sceneMemberID="viewController">
@@ -516,15 +516,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="9a5-Gv-eFo">
-                        <nil key="title"/>
-                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3OX-D7-uz0">
-                            <rect key="frame" x="180" y="7" width="240" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Back">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
+                    <navigationItem key="navigationItem" title="Title" id="RmE-iE-m4D">
+                        <barButtonItem key="backBarButtonItem" title="bds" id="RFx-ak-Rjj"/>
                     </navigationItem>
                     <connections>
                         <outlet property="mapOverView" destination="blh-75-yBh" id="3tc-B5-sfb"/>
@@ -750,7 +743,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIg-Ho-AuH">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kIg-Ho-AuH">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCW-BZ-aE4" customClass="GraphView" customModule="Run" customModuleProvider="target">
@@ -777,8 +770,13 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+<<<<<<< Updated upstream
         <segue reference="qC2-dG-bCh"/>
         <segue reference="rQt-0h-bsT"/>
+=======
+        <segue reference="AO3-qo-HzF"/>
+        <segue reference="ECG-rw-7fS"/>
+>>>>>>> Stashed changes
         <segue reference="Zb0-wI-dxC"/>
     </inferredMetricsTieBreakers>
 </document>
