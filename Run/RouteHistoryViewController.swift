@@ -16,59 +16,79 @@ class RouteHistory: UIViewController, UITableViewDelegate {
     @IBOutlet weak var tableViewObject: UITableView!
    
     var number = 1
-    let managedObjectContext:NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
+    var managedObjectContext:NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
     var RunInfoData = [RunInfo]()
-   
-
-
+    var deleteRouteIndexPath: NSIndexPath? = nil
+    
+    override func viewDidAppear(animated: Bool) {
+        tableViewObject.reloadData()
+        tableViewObject.reloadInputViews()
+    }
+ func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            var error: NSError?
+            var request = NSFetchRequest(entityName: "RunInfo")
+            RunInfoData = managedObjectContext?.executeFetchRequest(request, error: &error) as! [RunInfo]
+            // remove the deleted item from the model
+            let appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let context:NSManagedObjectContext = appDel.managedObjectContext!
+            context.deleteObject(RunInfoData[indexPath.row] as NSManagedObject)
+            RunInfoData.removeAtIndex(indexPath.row)
+            context.save(nil)
+            
+            //tableView.reloadData()
+            // remove the deleted item from the `UITableView`
+            self.tableViewObject.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+         
+        default:
+            return
+            
+        }
+    }
+  
+    
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        
         var error: NSError?
-        let request = NSFetchRequest(entityName: "RunInfo")
+        var request = NSFetchRequest(entityName: "RunInfo")
         RunInfoData = managedObjectContext?.executeFetchRequest(request, error: &error) as! [RunInfo]
         var routeCount = RunInfoData.count
 
-        if  routeCount >= 1 {
         return routeCount
-        }
-        else {
-            var one = 1
-            return one
-        }
-        
-    }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> mapCell
-        
-    {
-        
+    }
+   
+    
+func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> mapCell
+        {
         var identifier:String = "MapReuse"
-        let cell:mapCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! mapCell
-        var name = RouteDatabase.RouteName[number]
+        var cell:mapCell = tableView.dequeueReusableCellWithIdentifier(identifier, forIndexPath: indexPath) as! mapCell
         var error: NSError?
-        let request = NSFetchRequest(entityName: "RunInfo")
+        var request = NSFetchRequest(entityName: "RunInfo")
         RunInfoData = managedObjectContext?.executeFetchRequest(request, error: &error) as! [RunInfo]
         var routeCount = RunInfoData.count
-        var RunInfoForTable = RunInfoData[indexPath.row]
-        
-        if routeCount == 0 {
-            cell.routeName.text = "No Routes"
-            tableViewObject.rowHeight = 900
-            cell.DetailSegue.setTitle("generate route", forState: .Normal)
-        }
-        else{
-        
-        cell.routeName.text = RunInfoForTable.name
-        cell.mapImage.image = UIImage(data: RunInfoForTable.image)
-        cell.DetailSegue.setTitle("sfd", forState: .Normal )
-        }
         
         
+          
+            var RunInfoForTable = RunInfoData[indexPath.row]
+            
+            cell.routeName.text = RunInfoForTable.name
+            cell.mapImage.image = UIImage(data: RunInfoForTable.image)
+            cell.DetailSegue.setTitle("sfd", forState: .Normal )
+
+            
         
+ 
         return cell
         
     }
+
+    
+ 
+    
+    
 //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 //        if let detailViewController = segue.destinationViewController as? RouteGenerateNavigation {
 //        }
@@ -77,9 +97,21 @@ class RouteHistory: UIViewController, UITableViewDelegate {
 }
 class mapCell:UITableViewCell {
     
+   
     @IBOutlet weak var mapImage: UIImageView!
     @IBOutlet weak var routeName: UILabel!
     @IBOutlet weak var DetailSegue: UIButton!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Configure the view for the selected state
+    }
+
     
 }
 extension RouteDatabase{

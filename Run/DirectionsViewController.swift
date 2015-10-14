@@ -47,6 +47,8 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         static var locationLongitude: Double?
         static var endStepLatitude: Double?
         static var endStepLongitude: Double?
+        static var routeFocusCoordinates = [CLLocationCoordinate2D]()
+
     }
     
     var originMarker: GMSMarker!
@@ -143,14 +145,8 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
 //        coordinateOne = abs(global.locationLongitude! - global.endStepLongitude!)
 //        coordinateTwo = log((tan(global.endStepLatitude!/2 + M_PI/4))/(tan(global.locationLatitude!/2 + M_PI/4)))
 //        cameraDegree = atan2(coordinateOne, coordinateTwo)
-//        
-//        println(cameraDegree)
-//        println(global.locationLatitude!)
-//        println(global.locationLongitude!)
-//        println(global.endStepLatitude!)
-//        println(global.endStepLongitude!)
-        var camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(global.location, zoom: 17, bearing: 30, viewingAngle: 40)
-        DirectionsMapView.camera = camera
+
+       
 //        
 //         var distancetostepOne:Double = 2 * asin(sqrt((sin((global.locationLatitude! - global.endStepLatitude!)/2)) * (sin((global.locationLatitude! - global.endStepLatitude!)/2))) + (cos(global.locationLatitude!) * cos(global.endStepLatitude!) * (sin((global.locationLongitude! - global.endStepLongitude!)/2) * sin((global.locationLongitude! - global.endStepLongitude!)/2))))
 //        
@@ -170,12 +166,16 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         var routeInstructions = "pokemon"
         var routeDistance = "0"
         var routeDistanceInt = 0
-       
 
         for step in global.steps {
             routeDistanceInt = (step["distance"] as! Dictionary<NSObject, AnyObject>)["value"] as! Int
          routeInstructions = step["html_instructions"] as! String
+            var routeLatitude = (step["start_location"] as! Dictionary<NSObject, AnyObject>)["lat"] as! Double
+            var routeLongitude = (step["start_location"] as! Dictionary<NSObject, AnyObject>)["lng"] as! Double
             
+            var endCoordinate = CLLocationCoordinate2DMake(CLLocationDegrees(routeLatitude), CLLocationDegrees(routeLongitude))
+
+        global.routeFocusCoordinates.append(endCoordinate)
             
             global.streetDirections[++stepNumber] = "\(routeInstructions)"
             global.streetDistanceInt[stepNumber] = routeDistanceInt
@@ -183,7 +183,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
             println(step)
 
         }
-      
+   
      
     }
     func displayDirections () {
@@ -191,6 +191,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         var displayedManeuver = " "
         var displayedRouteDistance = " "
         var displayedRouteDisanceIntKm = 0
+        
         
         displayedRouteText = global.streetDirections[global.directionsNumber]!
         global.displayedRouteDistanceInt = global.streetDistanceInt[global.directionsNumber]!
@@ -202,7 +203,9 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
             var roundedDistance: Double = (round(Double(global.displayedRouteDistanceInt/100)))/10
             displayedRouteDistance = "\(roundedDistance)" + "km"
         }
-        
+        var camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(global.routeFocusCoordinates[global.directionsNumber], zoom: 17, bearing: 30, viewingAngle: 40)
+        DirectionsMapView.camera = camera
+
         
         var DirectionsTextSwift = NSAttributedString(
             data: displayedRouteText.dataUsingEncoding(NSUnicodeStringEncoding, allowLossyConversion: true)!,

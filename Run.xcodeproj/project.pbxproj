@@ -11,7 +11,7 @@
 		B01F76321B86EDA700048E53 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F76311B86EDA700048E53 /* AppDelegate.swift */; };
 		B01F76341B86EDA700048E53 /* RunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F76331B86EDA700048E53 /* RunViewController.swift */; };
 		B01F76371B86EDA700048E53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B01F76351B86EDA700048E53 /* Main.storyboard */; };
-		B01F76391B86EDA700048E53 /* DeltaRunLogo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B01F76381B86EDA700048E53 /* DeltaRunLogo.xcassets */; };
+		B01F76391B86EDA700048E53 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B01F76381B86EDA700048E53 /* Images.xcassets */; };
 		B01F763C1B86EDA700048E53 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B01F763A1B86EDA700048E53 /* LaunchScreen.xib */; };
 		B01F76481B86EDA700048E53 /* RunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F76471B86EDA700048E53 /* RunTests.swift */; };
 		B01F76541B86FEAE00048E53 /* RouteHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B01F76531B86FEAE00048E53 /* RouteHistoryViewController.swift */; };
@@ -21,9 +21,10 @@
 		B02FD20A1B8ED19B003579FF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B02FD2091B8ED19B003579FF /* CoreLocation.framework */; };
 		B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */; };
 		B037B97F1BAFA24300209D75 /* RouteGenerateNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */; };
+		B037EEA71BC74C7900A48748 /* RunInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B037EEA61BC74C7900A48748 /* RunInfo.swift */; };
 		B039DB2D1BC07FBD004D0DF2 /* Run.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B039DB2B1BC07FBD004D0DF2 /* Run.xcdatamodeld */; };
 		B039DB311BC0BA7F004D0DF2 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B039DB301BC0BA7F004D0DF2 /* Location.swift */; };
-		B04472071BC1971D00CADBC8 /* RunInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04472061BC1971D00CADBC8 /* RunInfo.swift */; };
+		B03A93DC1BC62DDF0057A978 /* MulticolorPolylineSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03A93DB1BC62DDF0057A978 /* MulticolorPolylineSegment.swift */; };
 		B04472091BC1AC9C00CADBC8 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04472081BC1AC9C00CADBC8 /* Polyline.swift */; };
 		B046E17E1BB65AB000E58F83 /* RouteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B046E17D1BB65AB000E58F83 /* RouteInfo.swift */; };
 		B046E1821BB668C600E58F83 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B046E1811BB668C600E58F83 /* GraphView.swift */; };
@@ -50,7 +51,7 @@
 		B01F76311B86EDA700048E53 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B01F76331B86EDA700048E53 /* RunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunViewController.swift; sourceTree = "<group>"; };
 		B01F76361B86EDA700048E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B01F76381B86EDA700048E53 /* DeltaRunLogo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = DeltaRunLogo.xcassets; sourceTree = "<group>"; };
+		B01F76381B86EDA700048E53 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B01F763B1B86EDA700048E53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		B01F76411B86EDA700048E53 /* RunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01F76461B86EDA700048E53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,9 +63,10 @@
 		B02FD2091B8ED19B003579FF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B02FEE221B8C15160008E9A9 /* MapOverviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOverviewViewController.swift; sourceTree = "<group>"; };
 		B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteGenerateNavigation.swift; path = ../RouteGenerateNavigation.swift; sourceTree = "<group>"; };
+		B037EEA61BC74C7900A48748 /* RunInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunInfo.swift; sourceTree = "<group>"; };
 		B039DB2C1BC07FBD004D0DF2 /* Run.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Run.xcdatamodel; sourceTree = "<group>"; };
 		B039DB301BC0BA7F004D0DF2 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		B04472061BC1971D00CADBC8 /* RunInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunInfo.swift; sourceTree = "<group>"; };
+		B03A93DB1BC62DDF0057A978 /* MulticolorPolylineSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MulticolorPolylineSegment.swift; sourceTree = "<group>"; };
 		B04472081BC1AC9C00CADBC8 /* Polyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
 		B046E17D1BB65AB000E58F83 /* RouteInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteInfo.swift; sourceTree = "<group>"; };
 		B046E1811BB668C600E58F83 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				B037B97E1BAFA24300209D75 /* RouteGenerateNavigation.swift */,
 				B02A170A1BB3872E00D539F1 /* RouteTracker.swift */,
 				B046E17D1BB65AB000E58F83 /* RouteInfo.swift */,
+				B03A93DB1BC62DDF0057A978 /* MulticolorPolylineSegment.swift */,
 				B0504C771BA11B2500745B80 /* DirectionsViewController.swift */,
 				B01F76331B86EDA700048E53 /* RunViewController.swift */,
 				B02FD2071B8EBD23003579FF /* GlobalVariables.swift */,
@@ -138,7 +141,7 @@
 				B019AD581B87A614004B1690 /* UserDatabase.swift */,
 				B01F76531B86FEAE00048E53 /* RouteHistoryViewController.swift */,
 				B046E1811BB668C600E58F83 /* GraphView.swift */,
-				B01F76381B86EDA700048E53 /* DeltaRunLogo.xcassets */,
+				B01F76381B86EDA700048E53 /* Images.xcassets */,
 				B01F76351B86EDA700048E53 /* Main.storyboard */,
 				B01F76311B86EDA700048E53 /* AppDelegate.swift */,
 				B039DB2B1BC07FBD004D0DF2 /* Run.xcdatamodeld */,
@@ -176,7 +179,7 @@
 		B05055471BBB98D000590577 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				B04472061BC1971D00CADBC8 /* RunInfo.swift */,
+				B037EEA61BC74C7900A48748 /* RunInfo.swift */,
 				B039DB301BC0BA7F004D0DF2 /* Location.swift */,
 			);
 			name = CoreData;
@@ -275,7 +278,7 @@
 			files = (
 				B01F76371B86EDA700048E53 /* Main.storyboard in Resources */,
 				B01F763C1B86EDA700048E53 /* LaunchScreen.xib in Resources */,
-				B01F76391B86EDA700048E53 /* DeltaRunLogo.xcassets in Resources */,
+				B01F76391B86EDA700048E53 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,18 +332,19 @@
 				B02FD2081B8EBD23003579FF /* GlobalVariables.swift in Sources */,
 				B039DB2D1BC07FBD004D0DF2 /* Run.xcdatamodeld in Sources */,
 				B02FEE231B8C15160008E9A9 /* MapOverviewViewController.swift in Sources */,
+				B03A93DC1BC62DDF0057A978 /* MulticolorPolylineSegment.swift in Sources */,
 				B01F76341B86EDA700048E53 /* RunViewController.swift in Sources */,
 				B019AD591B87A614004B1690 /* UserDatabase.swift in Sources */,
 				B01F76541B86FEAE00048E53 /* RouteHistoryViewController.swift in Sources */,
 				B039DB311BC0BA7F004D0DF2 /* Location.swift in Sources */,
 				B02A170B1BB3872E00D539F1 /* RouteTracker.swift in Sources */,
+				B037EEA71BC74C7900A48748 /* RunInfo.swift in Sources */,
 				B046E1821BB668C600E58F83 /* GraphView.swift in Sources */,
 				B046E17E1BB65AB000E58F83 /* RouteInfo.swift in Sources */,
 				B037B97F1BAFA24300209D75 /* RouteGenerateNavigation.swift in Sources */,
 				B0504C781BA11B2500745B80 /* DirectionsViewController.swift in Sources */,
 				B04472091BC1AC9C00CADBC8 /* Polyline.swift in Sources */,
 				B01F76321B86EDA700048E53 /* AppDelegate.swift in Sources */,
-				B04472071BC1971D00CADBC8 /* RunInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

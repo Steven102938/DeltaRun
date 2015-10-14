@@ -57,7 +57,7 @@ class RouteGenerateNavigation: UIViewController, CLLocationManagerDelegate {
         })
         
   
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(loc.locValue, zoom: 11)
+        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(loc.locValue, zoom: 14)
         mapLocationPreview.camera = camera
         
         mapLocationPreview.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)

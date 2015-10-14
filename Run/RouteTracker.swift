@@ -23,8 +23,13 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var paceLabel: UILabel!
+    @IBOutlet weak var stopButton: UIButton!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var promptLabel: UILabel!
+    @IBOutlet weak var staticLabelOne: UILabel!
+    @IBOutlet weak var staticLabelTwo: UILabel!
+    @IBOutlet weak var staticLabelThree: UILabel!
+    @IBOutlet weak var staticLabelFour: UILabel!
     
     @IBAction func StartTrack(sender: AnyObject) {
         startButton.hidden = true
@@ -33,8 +38,12 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
         timeLabel.hidden = false
         distanceLabel.hidden = false
         paceLabel.hidden = false
-//        stopButton.hidden = false
-        
+        stopButton.hidden = false
+        staticLabelOne.hidden = false
+        staticLabelTwo.hidden = false
+        staticLabelThree.hidden = false
+        staticLabelFour.hidden = false
+
         seconds = 0.0
         distance = 0.0
         locations.removeAll(keepCapacity: false)
@@ -56,7 +65,7 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var seconds = 0.0
     var distance = 0.0
-    lazy var timer = NSTimer()
+    lazy var timer:NSTimer? = NSTimer()
     var locations = [CLLocation]()
     
     func saveRun() {
@@ -77,7 +86,6 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
         runInfo.name = "recent"
         // 2
         
-        var savedLocations = [Location]()
         for location in locations {
                 let savedRun = NSEntityDescription.entityForName("Location",
                 inManagedObjectContext: managedObjectContext)
@@ -86,35 +94,72 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
             savedlocation.timestamp = location.timestamp
             savedlocation.latitude = location.coordinate.latitude
             savedlocation.longitude = location.coordinate.longitude
-            savedLocations.append(savedlocation)
-          
+            runInfo.mutableOrderedSetValueForKey("locations").addObject(savedlocation)
+         
         }
     
         // 3
         var error: NSError?
         managedObjectContext.save(&error)
-        
+        MapTracker.removeObserver(self, forKeyPath: "myLocation", context: nil)
+        stopUpdatingLocation()
 
+    }
+    func stopUpdatingLocation() {
+        locationManager.stopUpdatingLocation()
+        promptLabel.hidden = false
+        startButton.hidden = false
+
+        timeLabel.hidden = true
+        distanceLabel.hidden = true
+        paceLabel.hidden = true
+        stopButton.hidden = true
+        staticLabelOne.hidden  = true
+        staticLabelTwo.hidden  = true
+        staticLabelThree.hidden  = true
+        staticLabelFour.hidden  = true
+        timer!.invalidate()
+        timer = nil
+        locations.removeAll(keepCapacity: false)
+        timeLabel.text = "0:00"
+        MapTracker.clear()
     }
     func eachSecond(timer: NSTimer) {
         seconds++
         let secondsQuantity = HKQuantity(unit: HKUnit.secondUnit(), doubleValue: seconds)
         var secondsRunning = (secondsQuantity.description as NSString!).integerValue
-        if secondsRunning <= 60 {
-            timeLabel.text = "Time: " + secondsQuantity.description
+        var secondsForMinutes:String
+        if secondsRunning%60 < 10{
+            secondsForMinutes = "0" + "\(secondsRunning%60)"
+        }
+        else{
+            secondsForMinutes = "\(secondsRunning%60)"
+        }
+
+        if secondsRunning <= 9 {
+            timeLabel.text = "0:0" + "\(secondsRunning)"
+
+        }
+        if secondsRunning >= 10 && secondsRunning < 60 {
+            timeLabel.text = "0:" + "\(secondsRunning)"
         }
         else if secondsRunning >= 60{
-            timeLabel.text = "\(secondsRunning/60)" + "m" + "\(secondsRunning%60)" + "s"
+            timeLabel.text = "\(secondsRunning/60)" + ":" + "\(secondsForMinutes)"
         }
         let distanceQuantity = HKQuantity(unit: HKUnit.meterUnit(), doubleValue: distance)
-        distanceLabel.text = "Distance: " + distanceQuantity.description
-        
+        var distanceInFeetTemp = distance * 3.28084
+        var distanceInMilesTemp = distanceInFeetTemp/5280
+        var distanceInMiles = round(distanceInMilesTemp*100)/100
+        distanceLabel.text = "\(distanceInMiles)"
+
         if distance == 0 {
-            paceLabel.text = "Pace:0"
+            paceLabel.text = "0"
         }
+        else{
         let paceUnit = HKUnit.secondUnit().unitDividedByUnit(HKUnit.meterUnit())
         let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: seconds / distance)
-        paceLabel.text = "Pace: " + paceQuantity.description
+        paceLabel.text = paceQuantity.description
+        }
     }
         
     func startLocationUpdates() {
@@ -131,11 +176,16 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
         self.locationManager.activityType = .Fitness
         self.locationManager.requestAlwaysAuthorization()
         MapTracker.myLocationEnabled = true
-
+        
+        promptLabel.hidden = false
         timeLabel.hidden = true
         distanceLabel.hidden = true
         paceLabel.hidden = true
-//        stopButton.hidden = true
+        stopButton.hidden = true
+        staticLabelOne.hidden  = true
+        staticLabelTwo.hidden  = true
+        staticLabelThree.hidden  = true
+        staticLabelFour.hidden  = true
 
         
     }
@@ -147,6 +197,7 @@ class RouteTracker: UIViewController, CLLocationManagerDelegate {
             
             didFindMyLocation = true
         }
+       
     }
 }
 // MARK: - MKMapViewDelegate
@@ -172,7 +223,7 @@ extension RouteTracker: CLLocationManagerDelegate {
                     polyline.strokeWidth = 5.0
                     polyline.strokeColor = UIColor.blueColor()
                     polyline.map = MapTracker
-                        var camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 12, bearing: 0, viewingAngle: 0)
+                        var camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
                         MapTracker.camera = camera
                         MapTracker.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
 

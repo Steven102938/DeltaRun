@@ -19,6 +19,7 @@ class RouteInfo: UIViewController {
     let managedObjectContext:NSManagedObjectContext? = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext!
     var RunInfoData = [RunInfo]()
 
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var paceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
@@ -30,7 +31,6 @@ class RouteInfo: UIViewController {
         let currentdata = RunInfoData.removeLast()
         var distance = currentdata.distance as Double
         var seconds = currentdata.duration as Double
-        println(RunInfoData.count)
         if distance == 0 {
             paceLabel.text = "Pace:0"
         }
@@ -48,9 +48,35 @@ class RouteInfo: UIViewController {
         else if secondsRunning >= 60{
             timeLabel.text = "\(secondsRunning/60)" + "m" + "\(secondsRunning%60)" + "s"
         }
-        
-        
+        loadMap()
     }
+    func loadMap() {
+        var error: NSError?
+        var request = NSFetchRequest(entityName: "RunInfo")
+        RunInfoData = managedObjectContext?.executeFetchRequest(request, error: &error) as! [RunInfo]
+        var previousRun = RunInfoData.removeLast()
+        var previousRunLocations = previousRun.locations
+        var locationsArray = Array(previousRunLocations) as! [Location]
+
+            if previousRun.locations.count > 0 {
+                
+                let colorSegments = MulticolorPolylineSegment.colorSegments(forLocations: locationsArray)
+                for polylines in colorSegments {
+                    polylines.map = mapView
+                    polylines.strokeColor = polylines.color
+                }
+                
+            } else {
+                // No locations were found!
+                mapView.hidden = true
+                
+                UIAlertView(title: "Error",
+                    message: "Sorry, this run has no locations saved",
+                    delegate:nil,
+                    cancelButtonTitle: "OK").show()
+            }
+        }
+    
     
 }
         //5

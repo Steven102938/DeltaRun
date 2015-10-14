@@ -33,8 +33,11 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         let saveAction = UIAlertAction(title: "Save",
             style: .Default) { (action: UIAlertAction!) -> Void in
+        
+        let textField = alert.textFields![0] as! UITextField
+                names = textField.text
+
                 
-                   
                     let savedRun = NSEntityDescription.entityForName("RunInfo",
                         inManagedObjectContext: self.managedObjectContext)
                     let runInfo = RunInfo(entity: savedRun!, insertIntoManagedObjectContext: self.managedObjectContext)
@@ -43,7 +46,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
                     runInfo.distance = self.totalDistanceInMeters
                     runInfo.duration = self.totalDurationInSeconds
                     runInfo.timestamp = NSDate()
-                    runInfo.name = "recent"
+                    runInfo.name = names!
                     // 2
                     
                     var savedLocations = [Location]()
@@ -66,8 +69,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
                     
                 
 
-//                let textField = alert.textFields![0] as! UITextField
-//                names = textField.text
+                
 //                RouteDatabase.CoordinateOne[names!] = loc.locValue
 //                RouteDatabase.CoordinateOne[names!] = loc.locValueOne
 //                RouteDatabase.CoordinateOne[names!] = loc.locValueTwo
@@ -486,28 +488,7 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
 
         
-//        loc.locValueToSave = CLLocationCoordinate2DMake( (loc.locValue.latitude),(loc.locValue.longitude))
-        
-//        var StartLocation = MKPointAnnotation()
-//        StartLocation.coordinate = loc.locValue
-//        //         mapOverView.addAnnotation(StartLocation)
-//        
-//        var LocationOne = MKPointAnnotation()
-//        LocationOne.coordinate = loc.locValueOne
-//        //         mapOverView.addAnnotation(LocationOne)
-//        
-//        var LocationTwo = MKPointAnnotation()
-//        LocationTwo.coordinate = loc.locValueTwo
-//        //         mapOverView.addAnnotation(LocationTwo)
-//        
-//        var LocationThree = MKPointAnnotation()
-//        LocationThree.coordinate = loc.locValueThree
-//        //        mapOverView.addAnnotation(LocationThree)
-//       
-//        
-       // mapOverView.setRegion(MKCoordinateRegion(center: CLLocationCoordinate2DMake(loc.locValue.latitude, loc.locValue.longitude), span: MKCoordinateSpanMake(0.05, 0.05)), animated: true)
-        
-        
+
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error) -> Void in
             if  (error != nil) {
                 println("Error: " + error.localizedDescription)
@@ -535,15 +516,17 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         let DestinationThreePlaceMark = MKPlacemark(coordinate: loc.locValueThree, addressDictionary: nil)
         var destinationThree = MKMapItem(placemark: DestinationThreePlaceMark)
         
-        
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithTarget(loc.locValue, zoom: 11)
-        mapOverView.camera = camera
-       
+        var cameraBound:GMSCoordinateBounds = GMSCoordinateBounds(coordinate: loc.locValueOne, coordinate: loc.locValueThree)
+        let camera: GMSCameraUpdate = GMSCameraUpdate.fitBounds(cameraBound)
+        var insets:UIEdgeInsets = UIEdgeInsetsMake(60, 60, 60, 60)
+        var cameraPosition = mapOverView.cameraForBounds(cameraBound, insets: insets)
+        mapOverView.camera = cameraPosition
         mapOverView.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
         self.getDirections(nil, travelMode: nil)
-
-    
+        
+        mapOverView.removeObserver(self, forKeyPath: "myLocation", context: nil)
+        
         
         
     }
@@ -589,22 +572,18 @@ class MapOverviewViewController: UIViewController, MKMapViewDelegate, CLLocation
         }
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad(){
         super.viewDidLoad()
         
         var manager: CLLocationManager
-        
-        
-        
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        
-        
     }
+
     
     
     override func didReceiveMemoryWarning() {

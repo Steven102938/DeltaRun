@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Foundation
 
 
 class RunViewController: UIViewController, UITextFieldDelegate {
@@ -57,8 +57,8 @@ class RunViewController: UIViewController, UITextFieldDelegate {
         
         var MilesToRun = TotalSecondsToRun / TotalSecondsForMile
         OutletVariables.RouteDistance = MilesToRun
-        
         println(OutletVariables.RouteDistance!)
+
         }
     }
   
@@ -82,7 +82,16 @@ class RunViewController: UIViewController, UITextFieldDelegate {
         }
         return true
         }
-    
+    override func viewDidLoad() {
+        DistanceToRun.keyboardType = UIKeyboardType.DecimalPad
+        DistanceToRun.returnKeyType = UIReturnKeyType.Done
+
+        HoursRunning.keyboardType = UIKeyboardType.PhonePad
+        MinutesRunning.keyboardType = UIKeyboardType.PhonePad
+        MinutesMilePace.keyboardType = UIKeyboardType.PhonePad
+        SecondsMilePace.keyboardType = UIKeyboardType.PhonePad
+
+    }
 
     }
 
